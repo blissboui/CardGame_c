@@ -22,15 +22,17 @@ int main(void)
                 {
                 case New_game: // 1.새 게임
                     int odd_even_select;
+                    gamecard = ResetCard(); // 새로운 카드덱 생성
                     while (odd_even_select != 2) // 2누를시 종료
                     {
-                        ShowOddEvenGamePlay();
+                        ShowOddEvenGamePlay();  // 플레이 메뉴 출력
                         printf("Select:");
                         scanf("%d", odd_even_select);
-                        gamecard = ResetCard(); // 새로운 카드덱 생성
+                        
                         switch (odd_even_select)
                         {
                         case START_GAME: // 1. 게임 시작
+                            
                             break;
                         case END_GAME: // 2. 게임 종료
                             getch();   // 아무 키나 누르면 다음으로 진행

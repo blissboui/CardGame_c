@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
+#include <stdbool.h>
 #include "card.h"
 #define ODD_EVEN_GAME 1
 #define HIGH_LOW_GAME 2
@@ -23,3 +24,5 @@ void ShowOddEvenGamePlay(void); // 홀 짝 게임 플레이 메뉴 출력
 THE_CARD * ResetCard(void); // 카드를 기본값으로 설정
 int GetRandomNumber(int max, int min);  // 랜덤값 1개 반환 함수
 #endif
+
+//♤◇♧♡
