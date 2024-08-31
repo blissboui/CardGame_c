@@ -19,12 +19,12 @@ void ShowOddEvenGame(void)  // 홀/짝 게임 메뉴 출력 함수
 #define LOW_HIGH_GAME 2
 #define SUITS_GUESSING_GAME 3
 #define CARD_SIZE_MATCH_GAME 4
-#define  1
-#define  2
-#define  3
-#define  4
-#define  1
-#define  2
-#define  3
-#define  4
-#define  1
+// #define  1
+// #define  2
+// #define  3
+// #define  4
+// #define  1
+// #define  2
+// #define  3
+// #define  4
+// #define  1
