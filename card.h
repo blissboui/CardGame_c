@@ -4,5 +4,5 @@
 typedef struct
 {
     int card[4][10];
-} THE_CARD;
+}THE_CARD;
 #endif
