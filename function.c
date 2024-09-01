@@ -1,7 +1,6 @@
 #include "function.h"
 #include "card.h"
 
-
 int GetRandomNumber(int max, int min) // 랜덤값 반환 함수
 {
     return rand() % (max - min + 1) + min;
@@ -78,11 +77,37 @@ bool OddEvenResult(THE_CARD *gamecard)  // 홀수 짝수 결과 반환 함수
     // 첫번째 카드와 두번째 카드를 더한 값이 짝수=true 홀수=false
     return result;
 }
-/*void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_result)
+void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)
 {   
     // 홀수 짝수를 맞췄을 때
-    if(OddEvenResult(gamecard) == bet_result->odd_even_choice)
+    if(OddEvenResult(gamecard) == bet_results->odd_even_choice)
     {
-        strcpy(bet_result->game_result,"Succeed");
+        puts("[ Succeed ]");
+        strcpy(bet_results->game_results,"Succeed");
     }
-}*/
+
+    // 틀렸을 때
+    else
+    {
+        puts("[ Fail ]");
+        strcpy(bet_results->game_results,"Fail");
+    }
+}
+void ChooseOddEven(GAME_BET_RESULT *bet_results)
+{
+    int choice;
+    ShowOddEvenBetItem();   // 홀 짝 베팅 항목 출력
+    scanf("%d",&choice);
+    // 홀수 선택 시:false 짝수 선택 시:true
+    bet_results->odd_even_choice=choice == 1 ? false : true;
+}
+void ResultAllocateMemory(GAME_BET_RESULT *bet_results)  // 게임 결과 저장 메모리 할당, 추가
+{
+    if(bet_results->num_results+1 == bet_results->size_memory_results)
+    {
+        // 결과 저장 멤버의 메모리가 부족할 시 5 증가
+        bet_results->game_results=(char(*)[RESULT_SIZE])
+        realloc(bet_results->game_results,sizeof(bet_results->game_results)*(bet_results->size_memory_results+5));
+        bet_results->size_memory_results += 5;  // 늘린 메모리크기 저장
+    }
+}

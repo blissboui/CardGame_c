@@ -13,7 +13,9 @@ void ShowListGames(void)    // 게임 목록 출력 함수
          "2. LOW-HIGH GAME \n"
          "3. SUITS GUESSING GAME \n"
          "4. CARD SIZE MATCH GAME \n"
-         "5. EXIT");
+         "5. EXIT \n\n"
+
+         "Select The Game: ");
 }
 void ShowOddEvenGameMenu(void)  // 홀/짝 게임 메뉴 출력 함수
 {
@@ -22,12 +24,23 @@ void ShowOddEvenGameMenu(void)  // 홀/짝 게임 메뉴 출력 함수
          "1. New Game \n"
          "2. Continue \n"
          "3. Result \n"
-         "4. EXIT \n");
+         "4. EXIT \n\n"
+
+         "Select The Menu: ");
 }
 void ShowOddEvenGamePlay(void)  // 홀 짝 게임 플레이 메뉴 출력 함수
 {
     ClearScreen();
     puts("\n[GAME PLAY]\n"
          "1. Game Start \n"
-         "2. End \n");
+         "2. End \n\n"
+         
+         "Select: ");
+}
+void ShowOddEvenBetItem(void)   // 홀수 짝수 베팅 항목 출력 함수
+{
+    puts("1. ODD \n"
+         "2. EVEN \n\n"
+         
+         "What Is Your Choice: ");
 }

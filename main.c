@@ -4,13 +4,13 @@ int main(void)
 {
     srand(time(NULL));
     int select_game;
-    int card_sequence = 0; // 카드를 가져올때 첫번째 or 두번째 카드
-    THE_CARD *gamecard;    // 카드 덱
+    int card_sequence = 0;       // 카드를 가져올때 첫번째 or 두번째 카드
+    THE_CARD *gamecard=NULL;          // 카드 덱
+    GAME_BET_RESULT bet_results={NULL,0,5}; // 베팅 항목, 결과 (결과, 결과 개수, 메모리크기)
 
     while (1)
     {
         ShowListGames();
-        printf("Select The Game:");
         scanf("%d", &select_game);
 
         switch (select_game)
@@ -19,24 +19,24 @@ int main(void)
             while (select_game != 4) // 4누를 시 종료
             {
                 ShowOddEvenGameMenu(); // 메뉴 출력
-                printf("Select The Menu:");
                 scanf("%d", &select_game);
                 switch (select_game)
                 {
                 case New_game: // 1.새 게임
                     int odd_even_select;
-                    gamecard = ResetCard();      // 새로운 카드덱 생성
-                    
+                    gamecard = ResetCard(); // 새로운 카드덱 생성
+
                     while (odd_even_select != 2) // 2누를시 종료
                     {
                         ShowOddEvenGamePlay(); // 플레이 메뉴 출력
-                        printf("Select:");
                         scanf("%d", &odd_even_select);
 
                         switch (odd_even_select)
                         {
-                        case START_GAME: // 1. 게임 시작
-                            GetCard(gamecard, &card_sequence);
+                        case START_GAME:                       // 1. 게임 시작
+                            GetCard(gamecard, &card_sequence); // 첫번째 카드 출력
+                            ChooseOddEven(&bet_results);         // 베팅 항목 출력 후 홀 짝 선택
+                            GameResult(gamecard, &bet_results);  // 홀 짝 게임 결과 출력 후 저장
                             break;
                         case END_GAME: // 2. 게임 종료
                             getch();   // 아무 키나 누르면 다음으로 진행
