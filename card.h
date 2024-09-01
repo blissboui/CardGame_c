@@ -1,5 +1,6 @@
 #ifndef CARD_H
 #define CARD_H
+#include <stdbool.h>
 
 #define NUMBERS 10 // 카드 숫자
 #define SUITS 4    // 카드 문양

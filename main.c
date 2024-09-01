@@ -11,7 +11,8 @@ int main(void)
     {
         ShowListGames();
         printf("Select The Game:");
-        scanf("%d", select_game);
+        scanf("%d", &select_game);
+
         switch (select_game)
         {
         case ODD_EVEN_GAME:          // 홀/짝 게임
@@ -19,7 +20,7 @@ int main(void)
             {
                 ShowOddEvenGameMenu(); // 메뉴 출력
                 printf("Select The Menu:");
-                scanf("%d", select_game);
+                scanf("%d", &select_game);
                 switch (select_game)
                 {
                 case New_game: // 1.새 게임
@@ -30,7 +31,7 @@ int main(void)
                     {
                         ShowOddEvenGamePlay(); // 플레이 메뉴 출력
                         printf("Select:");
-                        scanf("%d", odd_even_select);
+                        scanf("%d", &odd_even_select);
 
                         switch (odd_even_select)
                         {

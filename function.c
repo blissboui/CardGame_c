@@ -1,6 +1,7 @@
 #include "function.h"
 #include "card.h"
 
+
 int GetRandomNumber(int max, int min) // 랜덤값 반환 함수
 {
     return rand() % (max - min + 1) + min;
@@ -52,7 +53,7 @@ void GetCard(THE_CARD *gamecard, int *sequence) // 카드 출력 함수
 {
     int random_number;
     int random_suits;
-    char first_or_second[] = *sequence == FIRST ? "First Card" : "Second Card";
+    char *first_or_second = (*sequence) == FIRST ? "First Card" : "Second Card";
     // sequence 값이 0이면 첫번째 or 1이면 두번째
     do
     {
@@ -77,11 +78,11 @@ bool OddEvenResult(THE_CARD *gamecard)  // 홀수 짝수 결과 반환 함수
     // 첫번째 카드와 두번째 카드를 더한 값이 짝수=true 홀수=false
     return result;
 }
-void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_result)
+/*void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_result)
 {   
     // 홀수 짝수를 맞췄을 때
     if(OddEvenResult(gamecard) == bet_result->odd_even_choice)
     {
         strcpy(bet_result->game_result,"Succeed");
     }
-}
+}*/
