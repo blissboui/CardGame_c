@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include <conio.h>
+#include <windows.h>
 #include <stdbool.h>
 #include "card.h"
 
@@ -31,9 +32,11 @@ void ShowOddEvenGamePlay(void); // 홀 짝 게임 플레이 메뉴 출력
 void ShowOddEvenBetItem(void);  // 홀 짝 베팅 항목 출력
 
 // 기능 함수
-THE_CARD *ResetCard(void);                                         // 카드를 기본값으로 설정
-int GetRandomNumber(int max, int min);                             // 랜덤값 1개 반환 함수
-void GetCard(THE_CARD *gamecard, int *sequence);                   // 랜덤 카드를 중복 검사 후 출력, 전달하고 해당 카드 제외하는 초기화 함수
+THE_CARD *ResetCard(void);             // 카드를 기본값으로 설정
+int GetRandomNumber(int max, int min); // 랜덤값 1개 반환 함수
+// void GetCard(THE_CARD *gamecard, int *sequence);                   // 랜덤 카드를 중복 검사 후 출력, 전달하고 해당 카드 제외하는 초기화 함수
+void GetFirstCard(THE_CARD *gamecard);                             // 첫번째 카드 출력 후 저장
+void GetSecondCard(THE_CARD *gamecard);                            // 두번째 카드 출력 후 저장
 void ChooseOddEven(GAME_BET_RESULT *bet_results);                  // 홀 짝 베팅 항목 출력 후 선택하는 함수
 void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 홀 짝 게임 결과 출력 후 저장 함수
 void ResultAllocateMemory(GAME_BET_RESULT *bet_results);           // 게임 결과 저장하는 메모리

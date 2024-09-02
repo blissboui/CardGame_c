@@ -4,7 +4,6 @@ int main(void)
 {
     srand(time(NULL));
     int select_game;
-    int card_sequence = 0;                      // 카드를 가져올때 첫번째 or 두번째 카드
     THE_CARD *gamecard = NULL;                  // 카드 덱
     GAME_BET_RESULT bet_results = {NULL, 0, 5}; // 베팅 항목, 결과 (결과, 결과 개수, 메모리크기)
 
@@ -33,8 +32,9 @@ int main(void)
                         switch (odd_even_select)
                         {
                         case START_GAME:                        // 1. 게임 시작
-                            GetCard(gamecard, &card_sequence);  // 첫번째 카드 출력
+                            GetFirstCard(gamecard);             // 첫번째 카드 출력
                             ChooseOddEven(&bet_results);        // 베팅 항목 출력 후 홀 짝 선택
+                            GetSecondCard(gamecard);            // 두번째 카드 출력
                             GameResult(gamecard, &bet_results); // 홀 짝 게임 결과 출력 후 저장
                             break;
                         case END_GAME: // 2. 게임 종료

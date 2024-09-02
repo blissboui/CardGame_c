@@ -11,8 +11,9 @@
 typedef struct
 {
     int card[SUITS][NUMBERS]; // 4개 문양 1~10까지 총 40장
-    int first_card;           // 첫번째 카드
-    int second_card;          // 두번째 카드
+    int num_first_card;           // 첫번째 카드 숫자
+    int suits_first_card;     // 첫번재 카드 문양
+    int num_second_card;          // 두번째 카드 숫자
 } THE_CARD;
 
 typedef struct
