@@ -35,6 +35,7 @@ int main(void)
                             GetFirstCard(gamecard);             // 첫번째 카드 출력
                             ChooseOddEven(&bet_results);        // 베팅 항목 출력 후 홀 짝 선택
                             GetSecondCard(gamecard);            // 두번째 카드 출력
+                            ResultAllocateMemory(&bet_results);
                             GameResult(gamecard, &bet_results); // 홀 짝 게임 결과 출력 후 저장
                             break;
                         case END_GAME: // 2. 게임 종료
@@ -49,8 +50,10 @@ int main(void)
                 case Continue: // 2.이어하기
                     break;
                 case Result: // 3.결과 확인
+                    ShowGameResults(&bet_results);
                     break;
                 case Exit:          // 4.나가기
+                    free(bet_results.game_results);    // 결과 저장 메모리 해제
                     free(gamecard); // 카드덱 메모리 해제
                     break;
                 }

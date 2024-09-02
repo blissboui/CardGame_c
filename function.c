@@ -30,16 +30,16 @@ char *GetSuits(int suits_num) // 카드 문양 전달 함수
     // UTF-8로 인코딩된 문자로 \0 포함 4바이트 필요
     switch (suits_num)
     {
-    case 1:
+    case 0:
         strcpy(suits, "\xE2\x99\xA0"); // 스페이드
         break;
-    case 2:
+    case 1:
         strcpy(suits, "\xE2\x99\xA5"); // 하트
         break;
-    case 3:
+    case 2:
         strcpy(suits, "\xE2\x99\xA6"); // 다이아
         break;
-    case 4:
+    case 3:
         strcpy(suits, "\xE2\x99\xA3"); // 클로버
         break;
     }
@@ -69,7 +69,7 @@ void GetFirstCard(THE_CARD *gamecard) // 첫번째 카드 출력후 저장
 
     ClearScreen(); // 화면 지우기
     suits = GetSuits(random_suits);
-    printf("First Card [ %s%d ] \n\n", suits, gamecard->card[random_suits][random_number]);
+    printf("\nFirst  Card [ %s%d ] \n\n", suits, gamecard->card[random_suits][random_number]);
     free(suits);                                     // 문양 출력이 끝나면 메모리 해제
     gamecard->card[random_suits][random_number] = 0; // 한번 나온 카드값을 0으로 초기화
     // 한번 나온 카드는 다시 나오지 않음
@@ -91,14 +91,14 @@ void GetSecondCard(THE_CARD *gamecard) // 두번째 카드 출력후 저장
 
     ClearScreen(); // 화면 지우기
     suits = GetSuits(gamecard->suits_first_card);
-    printf("First Card  [ %s%d ] \n", suits, gamecard->num_first_card);
+    printf("\nFirst  Card [ %s%d ] \n", suits, gamecard->num_first_card);
     free(suits); // 첫번째 카드 문양 출력 후 메모리 해제
     getch();
     suits = GetSuits(random_suits);
     printf("Second Card [ %s%d ] \n", suits, gamecard->card[random_suits][random_number]);
     free(suits); // 두번째 카드 문양 출력이 끝나면 메모리 해제
     gamecard->card[random_suits][random_number] = 0; // 한번 나온 카드값을 0으로 초기화
-    Sleep(1500); // 1.5초 동안 대기
+    Sleep(1000); // 1초 동안 대기
     // 한번 나온 카드는 다시 나오지 않음
 }
 // void GetCard(THE_CARD *gamecard, int *sequence) // 카드 출력 함수
@@ -136,7 +136,6 @@ bool OddEvenResult(THE_CARD *gamecard) // 홀수 짝수 결과 반환 함수
 }
 void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)   // 홀 짝 게임 결과 출력 후 저장 함수
 {
-    ResultAllocateMemory(bet_results);
     // 홀수 짝수를 맞췄을 때
     if (OddEvenResult(gamecard) == bet_results->odd_even_choice)
     {
@@ -145,7 +144,6 @@ void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)   // 홀 짝 �
         bet_results->num_results += 1;
         getch();
     }
-
     // 틀렸을 때
     else
     {
@@ -165,7 +163,7 @@ void ChooseOddEven(GAME_BET_RESULT *bet_results) // 베팅 목록 출력 후 홀
 }
 void ResultAllocateMemory(GAME_BET_RESULT *bet_results) // 게임 결과 저장 메모리 할당, 추가
 {
-    bet_results->game_results = (char(*)[RESULT_SIZE])malloc(5 * sizeof(bet_results->game_results));
+    bet_results->game_results = (char(*)[RESULT_SIZE])malloc(20 * sizeof(*bet_results->game_results));
     // if (bet_results->num_results + 1 == bet_results->size_memory_results)
     // {
     //     // 결과 저장 멤버의 메모리가 부족할 시 5 증가
@@ -173,4 +171,13 @@ void ResultAllocateMemory(GAME_BET_RESULT *bet_results) // 게임 결과 저장 
     //         realloc(bet_results->game_results, sizeof(bet_results->game_results) * (bet_results->size_memory_results + 5));
     //     bet_results->size_memory_results += 5; // 늘린 메모리크기 저장
     // }
+}
+void ShowGameResults(GAME_BET_RESULT *bet_results)  // 게임 결과 출력 함수
+{
+    ClearScreen();
+    for(int result=0 ; result<bet_results->num_results ; result++)
+    {
+        printf("%2d. %s \n", result+1, bet_results->game_results[result]);
+    }
+    getch();
 }

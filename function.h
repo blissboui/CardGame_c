@@ -40,6 +40,7 @@ void GetSecondCard(THE_CARD *gamecard);                            // 두번째 
 void ChooseOddEven(GAME_BET_RESULT *bet_results);                  // 홀 짝 베팅 항목 출력 후 선택하는 함수
 void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 홀 짝 게임 결과 출력 후 저장 함수
 void ResultAllocateMemory(GAME_BET_RESULT *bet_results);           // 게임 결과 저장하는 메모리
+void ShowGameResults(GAME_BET_RESULT *bet_results);  // 게임 결과 출력 함수
 #endif
 
 // ♤◇♧♡
