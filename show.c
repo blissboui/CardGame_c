@@ -5,6 +5,10 @@ void ClearScreen() // 콘솔 화면 지우는 함수
 {
     system("cls"); // windows에서 콘솔 화면을 지우는 명령어
 }
+void PauseScreen()  // 계속하려면 아무 키나 누르십시오 출력
+{
+    system("pause");
+}
 void ShowListGames(void) // 게임 목록 출력 함수
 {
     ClearScreen();
