@@ -21,7 +21,7 @@ void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)   // 홀 짝 �
         strcpy(bet_results->game_results[bet_results->num_results], "Fail");
     }
     bet_results->num_results += 1;  // 저장된 결과 개수 증가
-    Sleep(4000);
+    getch();
 }
 void ChooseOddEven(GAME_BET_RESULT *bet_results) // 베팅 목록 출력 후 홀 짝 선택
 {
