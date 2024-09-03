@@ -34,9 +34,8 @@ int main(void)
                         case START_GAME: // 1. 게임 시작
                             if (state == 0) // 새로운 게임 시작시 1회만 실행
                             {   
-                                free(gamecard);
-                                gamecard = ResetCard();
-                                NewGameSetUp(gamecard, &bet_results); // 게임 시작 전 설정 함수
+                                NewGameSetUp(&gamecard, &bet_results); // 게임 시작 전 설정 함수
+                                state = 1;
                             }
                             PlayOddEvenGame(gamecard, &bet_results); // 홀짝 게임 플레이 함수
                             break;
@@ -75,6 +74,7 @@ int main(void)
                 case Exit:                          // 4.나가기
                     free(bet_results.game_results); // 결과 저장 메모리 해제
                     free(gamecard);                 // 카드덱 메모리 해제
+                    bet_results.num_results = 0;    // 게임 결과 개수 초기화
                     break;
                 }
             }

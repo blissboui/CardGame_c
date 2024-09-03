@@ -37,9 +37,9 @@ THE_CARD *ResetCard(void);                                           // 카드�
 int GetRandomNumber(int max, int min);                               // 랜덤값 1개 반환 함수
 void GetFirstCard(THE_CARD *gamecard);                               // 첫번째 카드 출력 후 저장
 void GetSecondCard(THE_CARD *gamecard);                              // 두번째 카드 출력 후 저장
-void ResultAllocateMemory(GAME_BET_RESULT *bet_results);             // 게임 결과 저장하는 메모리
+void ResultAllocateMemory(GAME_BET_RESULT **bet_results);             // 게임 결과 저장하는 메모리
 void ShowGameResults(GAME_BET_RESULT *bet_results);                  // 게임 결과 출력 함수
-void NewGameSetUp(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합)
+void NewGameSetUp(THE_CARD **gamecard, GAME_BET_RESULT *bet_results); // 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합)
 
 // 홀 짝 게임 함수
 void PlayOddEvenGame(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)

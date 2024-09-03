@@ -106,9 +106,9 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     // 한번 나온 카드값을 0으로 초기화 (다시 나오지 않음)
 }
 
-void ResultAllocateMemory(GAME_BET_RESULT *bet_results) /***  게임 결과 저장 메모리 할당, 추가 ***/
+void ResultAllocateMemory(GAME_BET_RESULT **bet_results) /***  게임 결과 저장 메모리 할당, 추가 ***/
 {
-    bet_results->game_results = (char(*)[RESULT_SIZE])malloc(20 * sizeof(*bet_results->game_results));
+    (*bet_results)->game_results = (char(*)[RESULT_SIZE])malloc(20 * sizeof((*bet_results)->game_results));
 }
 
 void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함수***/
@@ -120,11 +120,11 @@ void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함
     }
     getch();
 }
-void NewGameSetUp(THE_CARD *gamecard, GAME_BET_RESULT *bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
+void NewGameSetUp(THE_CARD **gamecard, GAME_BET_RESULT *bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
 {
-    // free(gamecard);
-    // gamecard = ResetCard();            // 새로운 카드덱 생성
+    free(*gamecard);
+    *gamecard = ResetCard();            // 새로운 카드덱 생성
     free(bet_results->game_results);   // 새 게임 시작시 결과 저장 메모리 해제
-    ResultAllocateMemory(bet_results); // 게임 결과 저장 메모리 할당
+    ResultAllocateMemory(&bet_results); // 게임 결과 저장 메모리 할당
     bet_results->num_results = 0;      // 저장된 결과 개수 초기화
 }
