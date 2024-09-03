@@ -1,5 +1,12 @@
 #include "function.h"
 
+void PlayOddEvenGame(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)  // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
+{
+    GetFirstCard(gamecard);             // 첫번째 카드 출력
+    ChooseOddEven(bet_results);        // 베팅 항목 출력 후 홀 짝 선택
+    GetSecondCard(gamecard);            // 두번째 카드 출력
+    GameResult(gamecard, bet_results); // 홀 짝 게임 결과 출력 후 저장
+}
 bool OddEvenResult(THE_CARD *gamecard) // 홀수 짝수 결과 반환 함수
 {
     bool result = (gamecard->num_first_card + gamecard->num_second_card) % 2 == 0 ? true : false;

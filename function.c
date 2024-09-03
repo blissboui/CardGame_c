@@ -67,7 +67,7 @@ void GetFirstCard(THE_CARD *gamecard) /*** 첫번째 카드 출력후 저장 ***
         // 해당 카드가 이전에 나왔었는지 검사
     } while (CheckCardDuplication(gamecard->card[random_suits][random_number]));
 
-    gamecard->num_first_card = gamecard->card[random_suits][random_number]; // 첫번째 카드 숫자 저장
+    gamecard->num_first_card = random_number +1; // 첫번째 카드 숫자 저장
     gamecard->suits_first_card = random_suits;                              // 첫번째 카드 문양 저장
 
     ClearScreen(); // 화면 지우기
@@ -97,7 +97,7 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     suits = GetSuits(gamecard->suits_first_card);
     printf("\nFirst  Card [ %s%d ] \n", suits, gamecard->num_first_card);
     free(suits); // 첫번째 카드 문양 출력 후 메모리 해제
-    Sleep(4000); // 2초 동안 대기
+    Sleep(3000); // 2초 동안 대기
     suits = GetSuits(random_suits);
     printf("Second Card [ %s%d ] \n", suits, gamecard->card[random_suits][random_number]);
     free(suits); // 두번째 카드 문양 출력이 끝나면 메모리 해제
@@ -119,4 +119,12 @@ void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함
         printf("%2d. %s \n", result + 1, bet_results->game_results[result]);
     }
     getch();
+}
+void NewGameSetUp(THE_CARD *gamecard, GAME_BET_RESULT *bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
+{
+    // free(gamecard);
+    // gamecard = ResetCard();            // 새로운 카드덱 생성
+    free(bet_results->game_results);   // 새 게임 시작시 결과 저장 메모리 해제
+    ResultAllocateMemory(bet_results); // 게임 결과 저장 메모리 할당
+    bet_results->num_results = 0;      // 저장된 결과 개수 초기화
 }

@@ -33,7 +33,9 @@ int main(void)
                         {
                         case START_GAME: // 1. 게임 시작
                             if (state == 0) // 새로운 게임 시작시 1회만 실행
-                            {
+                            {   
+                                free(gamecard);
+                                gamecard = ResetCard();
                                 NewGameSetUp(gamecard, &bet_results); // 게임 시작 전 설정 함수
                             }
                             PlayOddEvenGame(gamecard, &bet_results); // 홀짝 게임 플레이 함수

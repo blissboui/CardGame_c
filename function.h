@@ -26,22 +26,25 @@
 
 // 메뉴 출력 함수
 void ClearScreen();             // 콘솔 화면을 지우는 함수
-void PauseScreen();  // 계속하려면 아무 키나 누르십시오 출력
+void PauseScreen();             // 계속하려면 아무 키나 누르십시오 출력
 void ShowListGames(void);       // 게임 메뉴 출력
 void ShowOddEvenGameMenu(void); // 홀/짝 게임 메뉴 출력
 void ShowOddEvenGamePlay(void); // 홀 짝 게임 플레이 메뉴 출력
 void ShowOddEvenBetItem(void);  // 홀 짝 베팅 항목 출력
 
-
 // 기능 함수
-THE_CARD *ResetCard(void);             // 카드를 기본값으로 설정
-int GetRandomNumber(int max, int min); // 랜덤값 1개 반환 함수
-void GetFirstCard(THE_CARD *gamecard);                             // 첫번째 카드 출력 후 저장
-void GetSecondCard(THE_CARD *gamecard);                            // 두번째 카드 출력 후 저장
-void ChooseOddEven(GAME_BET_RESULT *bet_results);                  // 홀 짝 베팅 항목 출력 후 선택하는 함수
-void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 홀 짝 게임 결과 출력 후 저장 함수
-void ResultAllocateMemory(GAME_BET_RESULT *bet_results);           // 게임 결과 저장하는 메모리
-void ShowGameResults(GAME_BET_RESULT *bet_results);  // 게임 결과 출력 함수
+THE_CARD *ResetCard(void);                                           // 카드를 기본값으로 설정
+int GetRandomNumber(int max, int min);                               // 랜덤값 1개 반환 함수
+void GetFirstCard(THE_CARD *gamecard);                               // 첫번째 카드 출력 후 저장
+void GetSecondCard(THE_CARD *gamecard);                              // 두번째 카드 출력 후 저장
+void ResultAllocateMemory(GAME_BET_RESULT *bet_results);             // 게임 결과 저장하는 메모리
+void ShowGameResults(GAME_BET_RESULT *bet_results);                  // 게임 결과 출력 함수
+void NewGameSetUp(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합)
+
+// 홀 짝 게임 함수
+void PlayOddEvenGame(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
+void ChooseOddEven(GAME_BET_RESULT *bet_results);                       // 홀 짝 베팅 항목 출력 후 선택하는 함수
+void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
 #endif
 
 // ♤◇♧♡
