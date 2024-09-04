@@ -6,7 +6,7 @@ int main(void)
     int select_game;
     int odd_even_select;
     THE_CARD *gamecard = NULL;                  // 카드 덱
-    GAME_BET_RESULT bet_results = {NULL, 0, 5}; // 베팅 항목, 결과 (결과, 결과 개수, 메모리크기)
+    GAME_BET_RESULT bet_results = {NULL, 0, INIT_RESULTS_STORAGE_MEMORY}; // 베팅 항목, 결과 (결과, 결과 개수, 결과 저장 기본 메모리 크기)
 
     while (1)
     {
@@ -42,7 +42,7 @@ int main(void)
                         case END_GAME: // 2. 게임 종료
                             break;
                         default:
-                            puts("Please Enter It Correctly.");
+                            puts("Please enter it correctly.");
                             getch(); // 아무 키나 누르면 다음으로 진행
                             break;
                         }
@@ -62,7 +62,7 @@ int main(void)
                         case END_GAME: // 2. 게임 종료
                             break;
                         default:
-                            puts("Please Enter It Correctly.");
+                            puts("please enter it correctly.");
                             getch(); // 아무 키나 누르면 다음으로 진행
                             break;
                         }
@@ -88,7 +88,7 @@ int main(void)
         case PROGRAM_END: // 프로그램 종료
             return 0;
         default:
-            puts("Please Enter It Correctly.");
+            puts("please enter it correctly.");
             getch(); // 아무 키나 누르면 다음으로 진행
             break;
         }

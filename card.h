@@ -20,7 +20,7 @@ typedef struct
 {
     char (*game_results)[RESULT_SIZE]; // 게임 결과 저장
     int num_results;    // 저장된 결과의 수
-    int size_memory_results; // 결과 저장 메모리 크기
+    int size_results_memory; // 결과 저장 메모리 크기
     bool odd_even_choice;    // 짝수=true, 홀수=false
     int betting_amount;      // 베팅 금액
 } GAME_BET_RESULT;

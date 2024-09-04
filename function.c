@@ -8,7 +8,7 @@ int GetRandomNumber(int min, int max) /*** 랜덤값 반환 함수 ***/
 
 THE_CARD *ResetCard(void) /*** 새 게임 시 카드 기본값 초기화 함수 ***/
 {
-    THE_CARD *gamecard = (THE_CARD *)malloc(sizeof(THE_CARD));
+    THE_CARD *gamecard = (THE_CARD *)CheckMemoryAllocation(malloc(sizeof(THE_CARD)));
     // 카드 기본값 동적 할당
     if (gamecard == NULL)
     {
@@ -27,7 +27,7 @@ THE_CARD *ResetCard(void) /*** 새 게임 시 카드 기본값 초기화 함수 
 
 char *GetSuits(int suits_num) /***  카드 문양 전달 함수 ***/
 {
-    char *suits = (char *)malloc(4 * sizeof(char));
+    char *suits = (char *)CheckMemoryAllocation(malloc(4 * sizeof(char)));
     // UTF-8로 인코딩된 문자로 \0 포함 4바이트 필요
     switch (suits_num)
     {
@@ -67,8 +67,8 @@ void GetFirstCard(THE_CARD *gamecard) /*** 첫번째 카드 출력후 저장 ***
         // 해당 카드가 이전에 나왔었는지 검사
     } while (CheckCardDuplication(gamecard->card[random_suits][random_number]));
 
-    gamecard->num_first_card = random_number +1; // 첫번째 카드 숫자 저장
-    gamecard->suits_first_card = random_suits;                              // 첫번째 카드 문양 저장
+    gamecard->num_first_card = random_number + 1; // 첫번째 카드 숫자 저장
+    gamecard->suits_first_card = random_suits;    // 첫번째 카드 문양 저장
 
     ClearScreen(); // 화면 지우기
     suits = GetSuits(random_suits);
@@ -97,20 +97,38 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     suits = GetSuits(gamecard->suits_first_card);
     printf("\nFirst  Card [ %s%d ] \n", suits, gamecard->num_first_card);
     free(suits); // 첫번째 카드 문양 출력 후 메모리 해제
-    Sleep(3000); // 2초 동안 대기
+    //Sleep(3000); // 2초 동안 대기
     suits = GetSuits(random_suits);
     printf("Second Card [ %s%d ] \n", suits, gamecard->card[random_suits][random_number]);
     free(suits); // 두번째 카드 문양 출력이 끝나면 메모리 해제
     gamecard->card[random_suits][random_number] = 0;
-    Sleep(3000); // 1초 동안 대기
+    //Sleep(3000); // 1초 동안 대기
     // 한번 나온 카드값을 0으로 초기화 (다시 나오지 않음)
 }
 
-void ResultAllocateMemory(GAME_BET_RESULT **bet_results) /***  게임 결과 저장 메모리 할당, 추가 ***/
+void AllocateGameResultsMemory(GAME_BET_RESULT **bet_results) /***  게임 결과 저장 메모리 최초 할당 ***/
 {
-    (*bet_results)->game_results = (char(*)[RESULT_SIZE])malloc(20 * sizeof((*bet_results)->game_results));
+    (*bet_results)->game_results = (char(*)[RESULT_SIZE])CheckMemoryAllocation(malloc(INIT_RESULTS_STORAGE_MEMORY * sizeof((*bet_results)->game_results)));
 }
-
+void AddGameResultsMemory(GAME_BET_RESULT **bet_results) /*** 게임 결과 저장 메모리 추가 할당 ***/
+{
+    if ((*bet_results)->num_results == (*bet_results)->size_results_memory)
+    {
+        (*bet_results)->size_results_memory += 5;
+        (*bet_results)->game_results = CheckMemoryAllocation(realloc((*bet_results)->game_results, (*bet_results)->size_results_memory * sizeof((*bet_results)->game_results)));
+        // 메모리 추가가 필요할 시 5만큼 추가 할당
+    }
+}
+void *CheckMemoryAllocation(void *memory) /*** 메모리 할당 검사 함수 ***/
+{
+    if (memory == NULL)
+    {
+        puts("Memory allocation failed!");
+        exit(EXIT_FAILURE);
+        //  메모리 할당 실패 시 프로그램 종료
+    }
+    return memory;
+}
 void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함수***/
 {
     ClearScreen();
@@ -123,8 +141,8 @@ void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함
 void NewGameSetUp(THE_CARD **gamecard, GAME_BET_RESULT *bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
 {
     free(*gamecard);
-    *gamecard = ResetCard();            // 새로운 카드덱 생성
-    free(bet_results->game_results);   // 새 게임 시작시 결과 저장 메모리 해제
-    ResultAllocateMemory(&bet_results); // 게임 결과 저장 메모리 할당
-    bet_results->num_results = 0;      // 저장된 결과 개수 초기화
+    *gamecard = ResetCard();                    // 새로운 카드덱 생성
+    free(bet_results->game_results);            // 새 게임 시작시 결과 저장 메모리 해제
+    AllocateGameResultsMemory(&bet_results); // 게임 결과 저장 메모리 할당
+    bet_results->num_results = 0;               // 저장된 결과 개수 초기화
 }

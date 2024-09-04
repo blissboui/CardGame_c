@@ -5,6 +5,7 @@
         "conio.h": "c",
         "stdlib.h": "c",
         "time.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "cstdlib": "c"
     }
 }
