@@ -10,6 +10,8 @@
 #include <stdbool.h>
 #include "card.h"
 
+#define LOGIN 1
+#define SIGN_UP 2
 #define ODD_EVEN_GAME 1
 #define HIGH_LOW_GAME 2
 #define SUITS_GUESSING_GAME 3
@@ -31,6 +33,7 @@
 // 메뉴 출력 함수
 void ClearScreen();             // 콘솔 화면을 지우는 함수
 void PauseScreen();             // 계속하려면 아무 키나 누르십시오 출력
+void ShowLoginMenu(void);       // 로그인 메뉴 출력 함수
 void ShowListGames(void);       // 게임 메뉴 출력
 void ShowOddEvenGameMenu(void); // 홀/짝 게임 메뉴 출력
 void ShowOddEvenGamePlay(void); // 홀 짝 게임 플레이 메뉴 출력

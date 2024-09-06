@@ -9,6 +9,14 @@ void PauseScreen()  // 계속하려면 아무 키나 누르십시오 출력
 {
     system("pause");
 }
+void ShowLoginMenu(void)
+{
+    ClearScreen();
+    printf("\n[ Card Games ] \n"
+           "1. Login \n"
+           "2. Sign Up \n\n"
+           "Select: ");
+}
 void ShowListGames(void) // 게임 목록 출력 함수
 {
     ClearScreen();
@@ -18,7 +26,6 @@ void ShowListGames(void) // 게임 목록 출력 함수
            "3. SUITS GUESSING GAME \n"
            "4. CARD SIZE MATCH GAME \n"
            "5. EXIT \n\n"
-
            "Select The Game: ");
 }
 void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수
@@ -29,7 +36,6 @@ void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수
            "2. Continue \n"
            "3. Result \n"
            "4. EXIT \n\n"
-
            "Select The Menu: ");
 }
 void ShowOddEvenGamePlay(void) // 홀 짝 게임 플레이 메뉴 출력 함수
@@ -38,7 +44,6 @@ void ShowOddEvenGamePlay(void) // 홀 짝 게임 플레이 메뉴 출력 함수
     printf("\n[GAME PLAY]\n"
            "1. Game Start \n"
            "2. End \n\n"
-
            "Select: ");
 }
 void ShowOddEvenBetItem(void) // 홀수 짝수 베팅 항목 출력 함수

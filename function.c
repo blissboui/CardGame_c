@@ -109,12 +109,12 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     suits = GetSuits(gamecard->suits_first_card);
     printf("\nFirst  Card [ %s%d ] \n", suits, gamecard->num_first_card);
     free(suits); // 첫번째 카드 문양 출력 후 메모리 해제
-    // Sleep(3000); // 2초 동안 대기
+     Sleep(3000); // 2초 동안 대기
     suits = GetSuits(random_suits);
     printf("Second Card [ %s%d ] \n", suits, random_number + 1);
     free(suits); // 두번째 카드 문양 출력이 끝나면 메모리 해제
     gamecard->card[random_deck][random_suits][random_number] = 0;
-    // Sleep(3000); // 1초 동안 대기
+     Sleep(1000); // 1초 동안 대기
     //  한번 나온 카드값을 0으로 초기화 (다시 나오지 않음)
 }
 
