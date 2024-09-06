@@ -23,7 +23,6 @@
 #define END_GAME 2
 #define FIRST 0
 #define SECOND 1
-#define DEFAULT_RESULTS_MEMORY_SIZE 10
 #define SPADES "\xE2\x99\xA0"
 #define HEARTS "\xE2\x99\xA5"
 #define DIAMONDS "\xE2\x99\xA6"

@@ -4,6 +4,7 @@
   // 자세한 내용을 보려면 https://go.microsoft.com/fwlink/?linkid=830387을(를) 방문하세요.
   "version": "0.2.0",
   "configurations": [
+
       {
           "name": "gcc.exe - 활성 파일 빌드 및 디버그",
           "type": "cppdbg",
@@ -11,9 +12,9 @@
           "program": "${fileDirname}\\${workspaceFolderBasename}.exe",
           "args": [],
           "stopAtEntry": false,
+          "externalConsole": true,
           "cwd": "${fileDirname}",
           "environment": [],
-          "externalConsole": false,
           "MIMode": "gdb",
           "miDebuggerPath": "C:\\msys64\\ucrt64\\bin\\gdb.exe",
           "setupCommands": [

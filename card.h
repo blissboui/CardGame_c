@@ -2,10 +2,11 @@
 #define CARD_H
 #include <stdbool.h>
 
-#define DECK 1                                           // 카드 덱 수
+#define DECK 3                                           // 카드 덱 수
 #define SUITS 4                                          // 카드 문양
 #define NUMBERS 10                                       // 카드 숫자
 #define RESULT_SIZE 10                                   // 결과 문자 크기
+#define DEFAULT_RESULTS_MEMORY_SIZE 10                   // 결과 저장 메모리 기본크기
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
 // 총 120장
 

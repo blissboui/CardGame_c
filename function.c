@@ -29,7 +29,7 @@ void ResetDecksAfterGames(THE_CARD **gamecard, GAME_BET_RESULT *bet_results) /**
     {
         free(*gamecard);          // 기존 카드덱 메모리 해제
         *gamecard = ResetDecks();       // 새로운 카드덱 초기화
-        bet_results->num_of_games = 0; // 기본값
+        bet_results->num_of_games = 1; // 기본값
     }
 }
 
@@ -70,9 +70,9 @@ void GetFirstCard(THE_CARD *gamecard) /*** 첫번째 카드 출력후 저장 ***
     char *suits = NULL; // 카드문양 저장
     do
     {
-        random_deck = GetRandomNumber(0, 2);   // 랜덤 덱
-        random_suits = GetRandomNumber(0, 3);  // 랜덤 문양
-        random_number = GetRandomNumber(0, 9); // 랜덤 숫자
+        random_deck = GetRandomNumber(0, DECK-1);   // 랜덤 덱
+        random_suits = GetRandomNumber(0, SUITS-1);  // 랜덤 문양
+        random_number = GetRandomNumber(0, NUMBERS-1); // 랜덤 숫자
         // CheckCardDuplication()가 false를 반환 할때 까지 반복
         // 해당 카드가 이전에 나왔었는지 검사
     } while (CheckCardDuplication(gamecard->card[random_deck][random_suits][random_number]));
@@ -96,9 +96,9 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     char *suits = NULL; // 카드문양 저장
     do
     {
-        random_deck = GetRandomNumber(0, 2);   // 랜덤 덱
-        random_suits = GetRandomNumber(0, 3);  // 랜덤 문양
-        random_number = GetRandomNumber(0, 9); // 랜덤 숫자
+        random_deck = GetRandomNumber(0, DECK-1);   // 랜덤 덱
+        random_suits = GetRandomNumber(0, SUITS-1);  // 랜덤 문양
+        random_number = GetRandomNumber(0, NUMBERS-1); // 랜덤 숫자
         // CheckCardDuplication()가 false를 반환 할때 까지 반복
         // 해당 카드가 이전에 나왔었는지 검사
     } while (CheckCardDuplication(gamecard->card[random_deck][random_suits][random_number]));
