@@ -8,7 +8,7 @@ int main(void)
 
     while (1)
     {
-        THE_CARD *gamecard = NULL;                                               // 카드 덱
+        THE_CARD *gamecard = NULL;    // 카드 덱
         GAME_BET_RESULT bet_results = {NULL, 0, 0, DEFAULT_RESULTS_MEMORY_SIZE}; // 베팅 항목, 결과 (결과, 결과 개수, 진행된 게임 수, 결과 저장 기본 메모리 크기)
         ShowListGames();
         scanf("%d", &select_game);
@@ -37,7 +37,7 @@ int main(void)
                                 NewGameSetUp(&gamecard, &bet_results); // 게임 시작 전 설정 함수
                                 state = 1;
                             }
-                            ResetDecksAfterGames(&gamecard, &bet_results); // 최대 게임 플레이 수 초과시 카드 덱 리셋 함수
+                            //ResetDecksAfterGames(&gamecard, &bet_results); // 최대 게임 플레이 수 초과시 카드 덱 리셋 함수
                             PlayOddEvenGame(gamecard, &bet_results);      // 홀짝 게임 플레이 함수
                             break;
                         case END_GAME: // 2. 게임 종료
@@ -58,7 +58,7 @@ int main(void)
                         switch (odd_even_select)
                         {
                         case START_GAME:                                  // 1. 게임 시작
-                            ResetDecksAfterGames(&gamecard, &bet_results); // 최대 게임 플레이 수 초과시 카드 덱 리셋 함수
+                           // ResetDecksAfterGames(&gamecard, &bet_results); // 최대 게임 플레이 수 초과시 카드 덱 리셋 함수
                             PlayOddEvenGame(gamecard, &bet_results);      // 홀짝 게임 플레이 함수
                             break;
                         case END_GAME: // 2. 게임 종료

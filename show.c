@@ -11,7 +11,7 @@ void PauseScreen()  // 계속하려면 아무 키나 누르십시오 출력
 }
 void ShowListGames(void) // 게임 목록 출력 함수
 {
-    ClearScreen();
+    //ClearScreen();
     printf("\n---List Of Games--- \n"
            "1. ODD-EVEN GAME \n"
            "2. LOW-HIGH GAME \n"
@@ -23,7 +23,7 @@ void ShowListGames(void) // 게임 목록 출력 함수
 }
 void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수
 {
-    ClearScreen();
+    //ClearScreen();
     printf("\n[ODD-EVEN GAME]\n"
            "1. New Game \n"
            "2. Continue \n"
@@ -34,7 +34,7 @@ void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수
 }
 void ShowOddEvenGamePlay(void) // 홀 짝 게임 플레이 메뉴 출력 함수
 {
-    ClearScreen();
+    //ClearScreen();
     printf("\n[GAME PLAY]\n"
            "1. Game Start \n"
            "2. End \n\n"

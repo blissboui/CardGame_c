@@ -40,16 +40,16 @@ char *GetSuits(int suits_num) /***  카드 문양 전달 함수 ***/
     switch (suits_num)
     {
     case 0:
-        strcpy(suits, SPADES); // 스페이드
+        strncpy(suits, SPADES, 4); // 스페이드
         break;
     case 1:
-        strcpy(suits, HEARTS); // 하트
+        strncpy(suits, HEARTS, 4); // 하트
         break;
     case 2:
-        strcpy(suits, DIAMONDS); // 다이아
+        strncpy(suits, DIAMONDS, 4); // 다이아
         break;
     case 3:
-        strcpy(suits, CLUBS); // 클로버
+        strncpy(suits, CLUBS, 4); // 클로버
         break;
     }
     return suits;
@@ -80,7 +80,7 @@ void GetFirstCard(THE_CARD *gamecard) /*** 첫번째 카드 출력후 저장 ***
     gamecard->num_first_card = random_number + 1; // 첫번째 카드 숫자 저장
     gamecard->suits_first_card = random_suits;    // 첫번째 카드 문양 저장
 
-    ClearScreen(); // 화면 지우기
+    //ClearScreen(); // 화면 지우기
     suits = GetSuits(random_suits);
     printf("\nFirst  Card [ %s%d ] \n\n", suits, random_number + 1);
     free(suits); // 문양 출력이 끝나면 메모리 해제
@@ -105,7 +105,7 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
 
     gamecard->num_second_card = random_number + 1; // 두번째 카드 숫자저장
 
-    ClearScreen(); // 화면 지우기
+    //ClearScreen(); // 화면 지우기
     suits = GetSuits(gamecard->suits_first_card);
     printf("\nFirst  Card [ %s%d ] \n", suits, gamecard->num_first_card);
     free(suits); // 첫번째 카드 문양 출력 후 메모리 해제
@@ -143,7 +143,7 @@ void *CheckMemoryAllocation(void *memory) /*** 메모리 할당 검사 함수 **
 }
 void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함수***/
 {
-    ClearScreen();
+    //ClearScreen();
     for (int result = 0; result < bet_results->num_results; result++)
     {
         printf("%2d. %s \n", result + 1, bet_results->game_results[result]);

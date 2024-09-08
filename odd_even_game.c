@@ -5,7 +5,7 @@ void PlayOddEvenGame(THE_CARD *gamecard, GAME_BET_RESULT *bet_results) // 홀짝
     AddGameResultsMemory(&bet_results); // 결과 저장 메모리 부족 시 확장
     GetFirstCard(gamecard);             // 첫번째 카드 출력
     ChooseOddEven(bet_results);         // 베팅 항목 출력 후 홀 짝 선택
-    GetSecondCard(gamecard);            // 두번째 카드 출력
+    //GetSecondCard(gamecard);            // 두번째 카드 출력
     GameResult(gamecard, bet_results);  // 홀 짝 게임 결과 출력 후 저장
 }
 bool OddEvenResult(THE_CARD *gamecard) // 홀수 짝수 결과 반환 함수
