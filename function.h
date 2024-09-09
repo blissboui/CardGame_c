@@ -56,6 +56,10 @@ void NewGameSetUp(THE_CARD **gamecard, GAME_BET_RESULT *bet_results); // 게임 
 void PlayOddEvenGame(THE_CARD *gamecard, GAME_BET_RESULT *bet_results); // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
 void ChooseOddEven(GAME_BET_RESULT *bet_results);                       // 홀 짝 베팅 항목 출력 후 선택하는 함수
 void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
+
+int LoginUser(ACCOUNT_INFO *user, int user_num);
+void ClearInputBuffer(void);
+void RemoveNewline(char str[]);
 #endif
 
 // ♤◇♧♡

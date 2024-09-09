@@ -8,6 +8,10 @@
 #define RESULT_SIZE 10                                   // 결과 문자 크기
 #define DEFAULT_RESULTS_MEMORY_SIZE 10                   // 결과 저장 메모리 기본크기
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
+
+#define MAX_ID_LEN 10
+#define MAX_PW_LEN 4
+#define DEFAULT_USER_NUM 10
 // 총 120장
 
 // 카드 덱 구조체
@@ -29,4 +33,9 @@ typedef struct
     int betting_amount;                // 베팅 금액
 } GAME_BET_RESULT;
 
+typedef struct main2
+{
+    char userID[MAX_ID_LEN];
+    char userPW[MAX_PW_LEN];
+} ACCOUNT_INFO;
 #endif
