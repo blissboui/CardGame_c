@@ -14,18 +14,26 @@ void ShowLoginMenu(void)
     ClearScreen();
     printf("\n[ Card Games ] \n"
            "1. Login \n"
-           "2. Sign Up \n\n"
+           "2. Sign Up \n"
+           "3. Exit Game \n\n"
+           "Select: ");
+}
+void ShowMainMenu(void)
+{
+    ClearScreen();
+    printf("\n[ MENU ] \n"
+           "1. Game List \n"
+           "2. Profile \n"
+           "3. Log Out \n\n"
            "Select: ");
 }
 void ShowListGames(void) // 게임 목록 출력 함수
 {
     ClearScreen();
-    printf("\n---List Of Games--- \n"
+    printf("\n[ List Of Games ] \n"
            "1. ODD-EVEN GAME \n"
            "2. LOW-HIGH GAME \n"
-           "3. SUITS GUESSING GAME \n"
-           "4. CARD SIZE MATCH GAME \n"
-           "5. EXIT \n\n"
+           "3. EXIT \n\n"
            "Select The Game: ");
 }
 void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수

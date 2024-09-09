@@ -73,7 +73,7 @@
 //                 case RESULTS: // 3.결과 확인
 //                     ShowGameResults(&bet_results);
 //                     break;
-//                 case EXIT:          // 4.나가기
+//                 case BACK:          // 4.나가기
 //                     free(gamecard); // 카드덱 메모리 해제
 //                     break;
 //                 }

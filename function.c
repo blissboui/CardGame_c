@@ -1,5 +1,64 @@
 #include "function.h"
 
+int LoginUser(ACCOUNT_INFO *user, int user_num)
+{
+    char id[MAX_ID_LEN];
+    char password[MAX_PW_LEN];
+    ClearInputBuffer();
+    ClearScreen();
+    puts("\n[ Login ]");
+
+    printf("ID: \n");
+    printf("PW: ");
+
+    printf("\033[A"); // 커서를 위로 이동
+    fgets(id, MAX_ID_LEN, stdin);
+    RemoveNewline(id);
+
+    printf("PW: ");
+    fgets(password, MAX_PW_LEN, stdin);
+    RemoveNewline(password);
+    for (int idx = 0; idx < user_num; idx++)
+    {
+        if (strcmp(id, user[idx].userID) == 0 && strcmp(password, user[idx].userPW) == 0) // 같을 때
+            return 1;
+    }
+    return 0;
+}
+int SignUpUser(ACCOUNT_INFO *user, int user_num)
+{
+    char confirm_password[MAX_PW_LEN];
+    ClearInputBuffer();
+    ClearScreen();
+    puts("\n[ Sign up ]");
+    printf("ID: \n");
+    printf("PW: ");
+
+    printf("\033[A");
+    fgets(user[user_num].userID, MAX_ID_LEN, stdin);
+    RemoveNewline(user[user_num].userID);
+
+    printf("PW: ");
+    fgets(user[user_num].userPW, MAX_PW_LEN, stdin);
+    RemoveNewline(user[user_num].userPW);
+
+    printf("Confirm PW: ");
+    fgets(confirm_password, MAX_PW_LEN, stdin);
+    RemoveNewline(confirm_password);
+
+    if(strcmp(user[user_num].userPW, confirm_password) == 0)
+        return 1;
+
+    return 0;
+}
+void ClearInputBuffer(void)
+{
+    while (getchar() != '\n');
+}
+void RemoveNewline(char str[])
+{
+    str[strcspn(str, "\n")] = '\0';
+}
 int GetRandomNumber(int min, int max) /*** 랜덤값 반환 함수 ***/
 {
     return rand() % (max - min + 1) + min;
@@ -22,14 +81,14 @@ THE_CARD *ResetDecks(void) /*** 새 게임 시 카드 기본값 초기화 함수
     }
     return gamecard; // 동적 할당된 메모리 주소 반환
 }
-void ResetDecksAfterGames(THE_CARD **gamecard, GAME_BET_RESULT *bet_results) /*** 최대 게임 횟수 초과 시 카드덱 리셋 ***/
+void ResetDecksAfterGames(THE_CARD ***gamecard, GAME_BET_RESULT **bet_results) /*** 최대 게임 횟수 초과 시 카드덱 리셋 ***/
 {
     // 카드 리셋 후 진행된 게임 수가 최대 게임 수 일때 카드덱 리셋
-    if (bet_results->num_of_games == MAX_NUMBER_OF_GAMES)
+    if ((*bet_results)->num_of_games == MAX_NUMBER_OF_GAMES)
     {
-        free(*gamecard);          // 기존 카드덱 메모리 해제
-        *gamecard = ResetDecks();       // 새로운 카드덱 초기화
-        bet_results->num_of_games = 1; // 기본값
+        free(**gamecard);          // 기존 카드덱 메모리 해제
+        **gamecard = ResetDecks();       // 새로운 카드덱 초기화
+        (*bet_results)->num_of_games = 1; // 기본값
     }
 }
 
@@ -150,11 +209,11 @@ void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함
     }
     getch();
 }
-void NewGameSetUp(THE_CARD **gamecard, GAME_BET_RESULT *bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
+void NewGameSetUp(THE_CARD ***gamecard, GAME_BET_RESULT **bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
 {
-    free(*gamecard);
-    *gamecard = ResetDecks();                // 새로운 카드덱 생성
-    free(bet_results->game_results);         // 새 게임 시작시 결과 저장 메모리 해제
-    AllocateGameResultsMemory(&bet_results); // 게임 결과 저장 메모리 할당
-    bet_results->num_results = 0;            // 저장된 결과 개수 초기화
+    free(**gamecard);
+    **gamecard = ResetDecks();                // 새로운 카드덱 생성
+    free((*bet_results)->game_results);         // 새 게임 시작시 결과 저장 메모리 해제
+    AllocateGameResultsMemory(&(*bet_results)); // 게임 결과 저장 메모리 할당
+    (*bet_results)->num_results = 0;            // 저장된 결과 개수 초기화
 }

@@ -10,7 +10,7 @@
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
 
 #define MAX_ID_LEN 10
-#define MAX_PW_LEN 4
+#define MAX_PW_LEN 10
 #define DEFAULT_USER_NUM 10
 // 총 120장
 
