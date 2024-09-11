@@ -1,14 +1,17 @@
-#include "card.h"
 #include "function.h"
+#include "card.h"
+#include "show.h"
 
 int main(void)
 {
     srand(time(NULL));
     ACCOUNT_INFO *user = CheckMemoryAllocation(malloc(DEFAULT_USER_NUM * sizeof(ACCOUNT_INFO)));
-    int user_num = 0;
-    while(1)
+    int user_num = 0, currentUserIndex;
+
+    LoadData(user, &user_num);
+    while (1)
     {
-        while (1)   // 로그인, 회원가입
+        while (1) // 로그인, 회원가입
         {
             int select, login_success = 0, signUp_success = 0;
             ShowLoginMenu();
@@ -17,7 +20,7 @@ int main(void)
             switch (select)
             {
             case LOGIN:
-                login_success = LoginUser(user, user_num);
+                login_success = LoginUser(user, user_num, &currentUserIndex);
 
                 if (login_success == 1)
                     puts("--- Login Successful ---");
@@ -27,16 +30,18 @@ int main(void)
                 break;
 
             case SIGN_UP:
-                signUp_success = SignUpUser(user, user_num);
+                signUp_success = SignUpUser(user, &user_num);
 
-                if(signUp_success == 1)
+                if (signUp_success == 1)
                     puts("--- Sign up Successful ---");
+
                 else
                     puts("--- Sign up Failed ---");
-                user_num++;
                 getch();
                 break;
-            case EXIT_GAME:
+            case EXIT:
+                StoreData(user, user_num);
+                free(user);
                 return 0;
             default:
                 puts("please enter it correctly.");
@@ -47,110 +52,30 @@ int main(void)
             if (login_success == 1)
                 break;
         }
-        while(1)    // 메인메뉴
+        while (1) // 메인메뉴
         {
             int select;
             ShowMainMenu();
-            scanf("%d",&select);
+            scanf("%d", &select);
 
-            switch(select)
+            switch (select)
             {
-                case GAME_LIST:
-                    GameList();
-                    break;
-                case PROFILE:
-                    break;
-                case LOG_OUT:
-                    break;
-                default:
-                    puts("please enter it correctly.");
-                    getch();
-                    break;
-            }
-            if(select == LOG_OUT)
+            case GAME_LIST:
+                GameList();
                 break;
-        }
-    }
-}
-void GameList(void)
-{
-    while(1)
-    {
-        int select;
-        ShowListGames();
-        scanf("%d",&select);
-
-        switch (select)
-        {
-        case ODD_EVEN_GAME:
-            OddEvenGame(); 
-            break;
-        case HIGH_LOW_GAME:
-            break;
-        case EXIT_LIST:
-            break;
-        default:
-            puts("please enter it correctly.");
-            getch();
-            break;
-        }
-
-        if(select == EXIT_LIST)
-            break;
-    }
-}
-void OddEvenGame(void)
-{
-    THE_CARD *gamecard = NULL;
-    GAME_BET_RESULT bet_results = {NULL, 0, 0, DEFAULT_RESULTS_MEMORY_SIZE};
-    while(1)
-    {
-        int select;
-        ShowOddEvenGameMenu();
-        scanf("%d",&select);
-
-        switch(select)
-        {
-            case NEW_GAME:
-                NewGameOddEven(&gamecard,&bet_results);
-            case CONTINUE:
+            case PROFILE:
+                Profile(user, currentUserIndex);
                 break;
-            case RESULTS:
-                break;
-            case BACK:
-                break;
-        }
-
-        if(select == BACK)
-            break;
-    }
-}
-void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
-{
-    while(1)
-    {
-        int select, state=0;
-        ShowOddEvenGamePlay();
-        scanf("%d",&select);
-        switch(select)
-        {
-            case START_GAME:
-                if(state == 0)
-                {
-                    NewGameSetUp(&gamecard, &bet_results);
-                    state = 1;
-                }
-                ResetDecksAfterGames(&gamecard, &bet_results);
-                PlayOddEvenGame(gamecard, &bet_results);
-                break;
-            case END_GAME:
+            case LOG_OUT:
                 break;
             default:
-                puts("Please enter it correctly.");
+                puts("please enter it correctly.");
                 getch();
                 break;
+            }
+            if (select == LOG_OUT)
+                break;
         }
-        if(select == END_GAME)
-            break;
     }
 }
+

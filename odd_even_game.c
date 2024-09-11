@@ -1,5 +1,86 @@
 #include "function.h"
+#include "card.h"
+#include "show.h"
 
+void OddEvenGame(void)
+{
+    THE_CARD *gamecard = NULL;
+    GAME_BET_RESULT bet_results = {NULL, 0, 0, DEFAULT_RESULTS_MEMORY_SIZE};
+    while(1)
+    {
+        int select;
+        ShowOddEvenGameMenu();
+        scanf("%d",&select);
+
+        switch(select)
+        {
+            case NEW_GAME:
+                NewGameOddEven(&gamecard,&bet_results);
+                break;
+            case CONTINUE:
+                ContinueOddEven(&gamecard, &bet_results);
+                break;
+            case RESULTS:
+                ShowGameResults(&bet_results);
+                break;
+            case BACK:
+                free(gamecard);
+                free(bet_results.game_results);
+                return;
+        }
+    }
+}
+void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
+{
+    int state=0;
+    while(1)
+    {
+        int select;
+        ShowOddEvenGamePlay();
+        scanf("%d",&select);
+        switch(select)
+        {
+            case START_GAME:
+                if(state == 0)
+                {
+                    NewGameSetUp(&gamecard, &bet_results);
+                    state = 1;
+                }
+                ResetDecksAfterGames(&gamecard, &bet_results);
+                PlayOddEvenGame(gamecard, &bet_results);
+                break;
+            case END_GAME:
+                return;
+            default:
+                puts("Please enter it correctly.");
+                getch();
+                break;
+        }
+    }
+}
+
+void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
+{
+    while(1)
+    {
+        int select;
+        ShowOddEvenGamePlay();
+        scanf("%d",&select);
+        switch(select)
+        {
+            case START_GAME:
+                ResetDecksAfterGames(&gamecard, &bet_results);
+                PlayOddEvenGame(gamecard, &bet_results);
+                break;
+            case END_GAME:
+                return;
+            default:
+                puts("Please enter it correctly.");
+                getch();
+                break;
+        }
+    }
+}
 void PlayOddEvenGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results) // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
 {
     AddGameResultsMemory(bet_results); // 결과 저장 메모리 부족 시 확장

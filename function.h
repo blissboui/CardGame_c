@@ -1,5 +1,5 @@
-#ifndef FUNCTION_H
-#define FUNCTION_H
+#ifndef __FUNCTION_H__
+#define __FUNCTION_H__
 
 #include <stdio.h>
 #include <string.h>
@@ -12,35 +12,24 @@
 
 #define LOGIN 1
 #define SIGN_UP 2
-#define EXIT_GAME 3
+#define EXIT 3
 #define GAME_LIST 1
 #define PROFILE 2
 #define LOG_OUT 3
 #define ODD_EVEN_GAME 1
 #define HIGH_LOW_GAME 2
-#define EXIT_LIST 3
-#define PROGRAM_END 5
 #define NEW_GAME 1
 #define CONTINUE 2
 #define RESULTS 3
 #define BACK 4
 #define START_GAME 1
 #define END_GAME 2
-#define FIRST 0
-#define SECOND 1
+#define DEPOSIT 1
+#define WITHDRAW 2
 #define SPADES "\xE2\x99\xA0"
 #define HEARTS "\xE2\x99\xA5"
 #define DIAMONDS "\xE2\x99\xA6"
 #define CLUBS "\xE2\x99\xA3"
-
-// 메뉴 출력 함수
-void ClearScreen();             // 콘솔 화면을 지우는 함수
-void PauseScreen();             // 계속하려면 아무 키나 누르십시오 출력
-void ShowLoginMenu(void);       // 로그인 메뉴 출력 함수
-void ShowListGames(void);       // 게임 메뉴 출력
-void ShowOddEvenGameMenu(void); // 홀/짝 게임 메뉴 출력
-void ShowOddEvenGamePlay(void); // 홀 짝 게임 플레이 메뉴 출력
-void ShowOddEvenBetItem(void);  // 홀 짝 베팅 항목 출력
 
 // 기능 함수
 THE_CARD *ResetDecks(void);                                            // 카드를 기본값으로 설정
@@ -60,14 +49,20 @@ void PlayOddEvenGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results); // 홀
 void ChooseOddEven(GAME_BET_RESULT *bet_results);                       // 홀 짝 베팅 항목 출력 후 선택하는 함수
 void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
 
-int LoginUser(ACCOUNT_INFO *user, int user_num);
-int SignUpUser(ACCOUNT_INFO *user, int user_num);
+int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex);
+int SignUpUser(ACCOUNT_INFO *user, int *user_num);
 void ClearInputBuffer(void);
 void RemoveNewline(char str[]);
-void ShowMainMenu(void);
 void GameList(void);
 void OddEvenGame(void);
 void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+FILE *CheckFileOpen(FILE *userData);
+void LoadData(ACCOUNT_INFO *user,int *user_num);
+void StoreData(ACCOUNT_INFO *user, int user_num);
+void Profile(ACCOUNT_INFO *user, int currentUserIndex);
+void Withdrawal(ACCOUNT_INFO *user, int currentUserIndex);
+void Deposit(ACCOUNT_INFO *user, int currentUserIndex);
 #endif
 
 // ♤◇♧♡

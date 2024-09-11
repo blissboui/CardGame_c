@@ -1,6 +1,40 @@
 #include "function.h"
+#include "show.h"
+#include "card.h"
 
-int LoginUser(ACCOUNT_INFO *user, int user_num)
+FILE *CheckFileOpen(FILE *userData)
+{
+    if (userData == NULL)
+    {
+        puts("Failed to open file.");
+        getch();
+        return NULL;
+    }
+    return userData;
+}
+void StoreData(ACCOUNT_INFO *user, int user_num)
+{
+    FILE *fileclear = CheckFileOpen(fopen(USER_DATA, "w"));
+    fclose(fileclear);
+    FILE *userData = CheckFileOpen(fopen(USER_DATA, "a"));
+    for (int idx = 0; idx < user_num; idx++)
+        fprintf(userData, "%s %s %d\n", user[idx].userID, user[idx].userPW, user[idx].balance);
+
+    fclose(userData);
+}
+void LoadData(ACCOUNT_INFO *user, int *user_num)
+{
+    FILE *userData = CheckFileOpen(fopen(USER_DATA, "r"));
+    while (1)
+    {
+        fscanf(userData, "%s %s %d", user[*user_num].userID, user[*user_num].userPW, &user[*user_num].balance);
+        if (feof(userData) != 0)
+            break;
+        (*user_num)++;
+    }
+    fclose(userData);
+}
+int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex)
 {
     char id[MAX_ID_LEN];
     char password[MAX_PW_LEN];
@@ -20,12 +54,15 @@ int LoginUser(ACCOUNT_INFO *user, int user_num)
     RemoveNewline(password);
     for (int idx = 0; idx < user_num; idx++)
     {
-        if (strcmp(id, user[idx].userID) == 0 && strcmp(password, user[idx].userPW) == 0) // 같을 때
+        if (strcmp(id, user[idx].userID) == 0 && strcmp(password, user[idx].userPW) == 0)
+        { // 같을 때
+            *currentUserIndex = idx;
             return 1;
+        }
     }
     return 0;
 }
-int SignUpUser(ACCOUNT_INFO *user, int user_num)
+int SignUpUser(ACCOUNT_INFO *user, int *user_num)
 {
     char confirm_password[MAX_PW_LEN];
     ClearInputBuffer();
@@ -35,25 +72,98 @@ int SignUpUser(ACCOUNT_INFO *user, int user_num)
     printf("PW: ");
 
     printf("\033[A");
-    fgets(user[user_num].userID, MAX_ID_LEN, stdin);
-    RemoveNewline(user[user_num].userID);
+    fgets(user[*user_num].userID, MAX_ID_LEN, stdin);
+    RemoveNewline(user[*user_num].userID);
 
     printf("PW: ");
-    fgets(user[user_num].userPW, MAX_PW_LEN, stdin);
-    RemoveNewline(user[user_num].userPW);
+    fgets(user[*user_num].userPW, MAX_PW_LEN, stdin);
+    RemoveNewline(user[*user_num].userPW);
 
     printf("Confirm PW: ");
     fgets(confirm_password, MAX_PW_LEN, stdin);
     RemoveNewline(confirm_password);
 
-    if(strcmp(user[user_num].userPW, confirm_password) == 0)
+    if (strcmp(user[*user_num].userPW, confirm_password) == 0)
+    {
+        user[*user_num].balance = 0;
+        (*user_num)++;
         return 1;
-
+    }
     return 0;
+}
+void GameList(void)
+{
+    while (1)
+    {
+        int select;
+        ShowListGames();
+        scanf("%d", &select);
+
+        switch (select)
+        {
+        case ODD_EVEN_GAME:
+            OddEvenGame();
+            break;
+        case HIGH_LOW_GAME:
+            break;
+        case EXIT:
+            return;
+        default:
+            puts("please enter it correctly.");
+            getch();
+            break;
+        }
+    }
+}
+void Profile(ACCOUNT_INFO *user, int currentUserIndex)
+{
+    while (1)
+    {
+        int select;
+        ShowProfile(user, currentUserIndex);
+        scanf("%d", &select);
+
+        switch (select)
+        {
+        case DEPOSIT:
+            Deposit(user, currentUserIndex);
+            break;
+        case WITHDRAW:
+            Withdrawal(user, currentUserIndex);
+            break;
+        case EXIT:
+            return;
+        default:
+            puts("please enter it correctly.");
+            getch();
+            break;
+        }
+    }
+}
+void Deposit(ACCOUNT_INFO *user, int currentUserIndex)
+{
+    int depositAmount;
+    ClearScreen();
+    printf("\n[ Deposit ] \n"
+           "Deposit Amount: ");
+    scanf("%d", &depositAmount);
+
+    user[currentUserIndex].balance += depositAmount;
+}
+void Withdrawal(ACCOUNT_INFO *user, int currentUserIndex)
+{
+    int whitdrawalAmount;
+    ClearScreen();
+    printf("\n[ Deposit ] \n"
+           "Withdrawal Amount: ");
+    scanf("%d", &whitdrawalAmount);
+
+    user[currentUserIndex].balance -= whitdrawalAmount;
 }
 void ClearInputBuffer(void)
 {
-    while (getchar() != '\n');
+    while (getchar() != '\n')
+        ;
 }
 void RemoveNewline(char str[])
 {
@@ -86,8 +196,8 @@ void ResetDecksAfterGames(THE_CARD ***gamecard, GAME_BET_RESULT **bet_results) /
     // 카드 리셋 후 진행된 게임 수가 최대 게임 수 일때 카드덱 리셋
     if ((*bet_results)->num_of_games == MAX_NUMBER_OF_GAMES)
     {
-        free(**gamecard);          // 기존 카드덱 메모리 해제
-        **gamecard = ResetDecks();       // 새로운 카드덱 초기화
+        free(**gamecard);                 // 기존 카드덱 메모리 해제
+        **gamecard = ResetDecks();        // 새로운 카드덱 초기화
         (*bet_results)->num_of_games = 1; // 기본값
     }
 }
@@ -129,9 +239,9 @@ void GetFirstCard(THE_CARD *gamecard) /*** 첫번째 카드 출력후 저장 ***
     char *suits = NULL; // 카드문양 저장
     do
     {
-        random_deck = GetRandomNumber(0, DECK-1);   // 랜덤 덱
-        random_suits = GetRandomNumber(0, SUITS-1);  // 랜덤 문양
-        random_number = GetRandomNumber(0, NUMBERS-1); // 랜덤 숫자
+        random_deck = GetRandomNumber(0, DECK - 1);      // 랜덤 덱
+        random_suits = GetRandomNumber(0, SUITS - 1);    // 랜덤 문양
+        random_number = GetRandomNumber(0, NUMBERS - 1); // 랜덤 숫자
         // CheckCardDuplication()가 false를 반환 할때 까지 반복
         // 해당 카드가 이전에 나왔었는지 검사
     } while (CheckCardDuplication(gamecard->card[random_deck][random_suits][random_number]));
@@ -155,9 +265,9 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     char *suits = NULL; // 카드문양 저장
     do
     {
-        random_deck = GetRandomNumber(0, DECK-1);   // 랜덤 덱
-        random_suits = GetRandomNumber(0, SUITS-1);  // 랜덤 문양
-        random_number = GetRandomNumber(0, NUMBERS-1); // 랜덤 숫자
+        random_deck = GetRandomNumber(0, DECK - 1);      // 랜덤 덱
+        random_suits = GetRandomNumber(0, SUITS - 1);    // 랜덤 문양
+        random_number = GetRandomNumber(0, NUMBERS - 1); // 랜덤 숫자
         // CheckCardDuplication()가 false를 반환 할때 까지 반복
         // 해당 카드가 이전에 나왔었는지 검사
     } while (CheckCardDuplication(gamecard->card[random_deck][random_suits][random_number]));
@@ -168,12 +278,12 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     suits = GetSuits(gamecard->suits_first_card);
     printf("\nFirst  Card [ %s%d ] \n", suits, gamecard->num_first_card);
     free(suits); // 첫번째 카드 문양 출력 후 메모리 해제
-     Sleep(3000); // 2초 동안 대기
+    Sleep(3000); // 2초 동안 대기
     suits = GetSuits(random_suits);
     printf("Second Card [ %s%d ] \n", suits, random_number + 1);
     free(suits); // 두번째 카드 문양 출력이 끝나면 메모리 해제
     gamecard->card[random_deck][random_suits][random_number] = 0;
-     Sleep(1000); // 1초 동안 대기
+    Sleep(1000); // 1초 동안 대기
     //  한번 나온 카드값을 0으로 초기화 (다시 나오지 않음)
 }
 
@@ -212,7 +322,7 @@ void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함
 void NewGameSetUp(THE_CARD ***gamecard, GAME_BET_RESULT **bet_results) /*** 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합) ***/
 {
     free(**gamecard);
-    **gamecard = ResetDecks();                // 새로운 카드덱 생성
+    **gamecard = ResetDecks();                  // 새로운 카드덱 생성
     free((*bet_results)->game_results);         // 새 게임 시작시 결과 저장 메모리 해제
     AllocateGameResultsMemory(&(*bet_results)); // 게임 결과 저장 메모리 할당
     (*bet_results)->num_results = 0;            // 저장된 결과 개수 초기화

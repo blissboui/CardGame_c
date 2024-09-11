@@ -1,5 +1,5 @@
-#ifndef CARD_H
-#define CARD_H
+#ifndef __CARD_H__
+#define __CARD_H__
 #include <stdbool.h>
 
 #define DECK 3                                           // 카드 덱 수
@@ -9,6 +9,7 @@
 #define DEFAULT_RESULTS_MEMORY_SIZE 10                   // 결과 저장 메모리 기본크기
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
 
+#define USER_DATA "user_data.txt"
 #define MAX_ID_LEN 10
 #define MAX_PW_LEN 10
 #define DEFAULT_USER_NUM 10
@@ -33,9 +34,11 @@ typedef struct
     int betting_amount;                // 베팅 금액
 } GAME_BET_RESULT;
 
-typedef struct main2
+typedef struct
 {
     char userID[MAX_ID_LEN];
     char userPW[MAX_PW_LEN];
+    int balance;
 } ACCOUNT_INFO;
+
 #endif
