@@ -21,28 +21,19 @@ int main(void)
             {
             case LOGIN:
                 login_success = LoginUser(user, user_num, &currentUserIndex);
-
-                if (login_success == 1)
-                    puts("--- Login Successful ---");
-                else
-                    puts("--- Login Failed ---");
                 getch();
                 break;
 
             case SIGN_UP:
                 signUp_success = SignUpUser(user, &user_num);
-
-                if (signUp_success == 1)
-                    puts("--- Sign up Successful ---");
-
-                else
-                    puts("--- Sign up Failed ---");
                 getch();
                 break;
+
             case EXIT:
                 StoreData(user, user_num);
                 free(user);
                 return 0;
+                
             default:
                 puts("please enter it correctly.");
                 getch();

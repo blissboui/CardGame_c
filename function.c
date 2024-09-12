@@ -56,10 +56,12 @@ int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex)
     {
         if (strcmp(id, user[idx].userID) == 0 && strcmp(password, user[idx].userPW) == 0)
         { // 같을 때
+            puts("--- Login Successful ---");
             *currentUserIndex = idx;
             return 1;
         }
     }
+    puts("--- Login Failed ---");
     return 0;
 }
 int SignUpUser(ACCOUNT_INFO *user, int *user_num)
@@ -85,10 +87,12 @@ int SignUpUser(ACCOUNT_INFO *user, int *user_num)
 
     if (strcmp(user[*user_num].userPW, confirm_password) == 0)
     {
+        puts("--- Sign up Successful ---");
         user[*user_num].balance = 0;
         (*user_num)++;
         return 1;
     }
+    puts("--- Sign up Failed ---");
     return 0;
 }
 void GameList(void)
