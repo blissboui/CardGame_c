@@ -8,6 +8,7 @@
 #define RESULT_SIZE 10                                   // 결과 문자 크기
 #define DEFAULT_RESULTS_MEMORY_SIZE 10                   // 결과 저장 메모리 기본크기
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
+#define BET_PAYOUT 1.98
 
 #define USER_DATA "user_data.txt"
 #define MAX_ID_LEN 10
@@ -30,8 +31,9 @@ typedef struct
     int num_results;                   // 저장된 결과의 수
     int num_of_games;                  // 카드 리셋 후 진행된 게임 수
     int size_results_memory;           // 결과 저장 메모리 크기
+    int user_balance;
+    int betAmount;                
     bool odd_even_choice;              // 짝수=true, 홀수=false
-    int betting_amount;                // 베팅 금액
 } GAME_BET_RESULT;
 
 typedef struct

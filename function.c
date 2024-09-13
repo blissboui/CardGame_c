@@ -64,7 +64,7 @@ int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex)
     puts("--- Login Failed ---");
     return 0;
 }
-int SignUpUser(ACCOUNT_INFO *user, int *user_num)
+void SignUpUser(ACCOUNT_INFO *user, int *user_num)
 {
     char confirm_password[MAX_PW_LEN];
     ClearInputBuffer();
@@ -90,12 +90,13 @@ int SignUpUser(ACCOUNT_INFO *user, int *user_num)
         puts("--- Sign up Successful ---");
         user[*user_num].balance = 0;
         (*user_num)++;
-        return 1;
+        StoreData(user, *user_num);
+        return;
     }
     puts("--- Sign up Failed ---");
-    return 0;
+    return;
 }
-void GameList(void)
+void GameList(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
 {
     while (1)
     {
@@ -106,7 +107,7 @@ void GameList(void)
         switch (select)
         {
         case ODD_EVEN_GAME:
-            OddEvenGame();
+            OddEvenGame(user, currentUserIndex, user_num);
             break;
         case HIGH_LOW_GAME:
             break;
@@ -119,7 +120,7 @@ void GameList(void)
         }
     }
 }
-void Profile(ACCOUNT_INFO *user, int currentUserIndex)
+void Profile(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
 {
     while (1)
     {
@@ -136,6 +137,7 @@ void Profile(ACCOUNT_INFO *user, int currentUserIndex)
             Withdrawal(user, currentUserIndex);
             break;
         case EXIT:
+            StoreData(user, user_num);
             return;
         default:
             puts("please enter it correctly.");
@@ -317,6 +319,7 @@ void *CheckMemoryAllocation(void *memory) /*** 메모리 할당 검사 함수 **
 void ShowGameResults(GAME_BET_RESULT *bet_results) /*** 게임 결과 출력 함수***/
 {
     ClearScreen();
+    puts("\n[ Games Result ]\n");
     for (int result = 0; result < bet_results->num_results; result++)
     {
         printf("%2d. %s \n", result + 1, bet_results->game_results[result]);
@@ -330,4 +333,28 @@ void NewGameSetUp(THE_CARD ***gamecard, GAME_BET_RESULT **bet_results) /*** 게�
     free((*bet_results)->game_results);         // 새 게임 시작시 결과 저장 메모리 해제
     AllocateGameResultsMemory(&(*bet_results)); // 게임 결과 저장 메모리 할당
     (*bet_results)->num_results = 0;            // 저장된 결과 개수 초기화
+}
+void SetBetAmount(GAME_BET_RESULT *bet_results)
+{
+    printf("\nBalance [ %d ] \n",bet_results->user_balance);
+    while(1)   // 배팅 금액이 현재 잔액보다 크면 반복
+    {
+        printf("Enter your bet amount: ");
+        scanf("%d", &bet_results->betAmount);
+
+        if(bet_results->betAmount <= bet_results->user_balance)
+            break;
+        printf("please enter it correctly");
+        getch();
+        ClearLine();
+    }
+    bet_results->user_balance -= bet_results->betAmount;
+}
+void ClearLine(void)
+{
+    printf("\033[0G");
+    printf("\033[K");
+    printf("\033[A");
+    printf("\033[0G");
+    printf("\033[K");
 }

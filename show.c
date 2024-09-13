@@ -51,20 +51,21 @@ void ShowProfile(ACCOUNT_INFO *user, int currentUserIndex)
 void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수
 {
     ClearScreen();
-    printf("\n[ODD-EVEN GAME]\n"
+    printf("\n[ ODD-EVEN GAME ]\n"
            "1. New Game \n"
            "2. Continue \n"
            "3. Result \n"
            "4. EXIT \n\n"
            "Select The Menu: ");
 }
-void ShowOddEvenGamePlay(void) // 홀 짝 게임 플레이 메뉴 출력 함수
+void ShowOddEvenGamePlay(GAME_BET_RESULT *bet_results) // 홀 짝 게임 플레이 메뉴 출력 함수
 {
     ClearScreen();
-    printf("\n[GAME PLAY]\n"
+    printf("\n[ GAME PLAY ]\n"
            "1. Game Start \n"
            "2. End \n\n"
-           "Select: ");
+           "Balance [ %d ] \n\n"
+           "Select: ",bet_results->user_balance);
 }
 void ShowOddEvenBetItem(void) // 홀수 짝수 베팅 항목 출력 함수
 {

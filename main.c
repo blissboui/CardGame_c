@@ -13,7 +13,7 @@ int main(void)
     {
         while (1) // 로그인, 회원가입
         {
-            int select, login_success = 0, signUp_success = 0;
+            int select, login_success = 0;
             ShowLoginMenu();
             scanf("%d", &select);
 
@@ -25,7 +25,7 @@ int main(void)
                 break;
 
             case SIGN_UP:
-                signUp_success = SignUpUser(user, &user_num);
+                SignUpUser(user, &user_num);
                 getch();
                 break;
 
@@ -52,10 +52,10 @@ int main(void)
             switch (select)
             {
             case GAME_LIST:
-                GameList();
+                GameList(user, currentUserIndex, user_num);
                 break;
             case PROFILE:
-                Profile(user, currentUserIndex);
+                Profile(user, currentUserIndex, user_num);
                 break;
             case LOG_OUT:
                 break;

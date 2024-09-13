@@ -43,6 +43,8 @@ void AddGameResultsMemory(GAME_BET_RESULT **bet_results);             // 결과 
 void *CheckMemoryAllocation(void *memory);                            // 메모리 할당 검사 함수
 void ShowGameResults(GAME_BET_RESULT *bet_results);                   // 게임 결과 출력 함수
 void NewGameSetUp(THE_CARD ***gamecard, GAME_BET_RESULT **bet_results); // 게임 시작 전 설정 함수 (게임 시작 전 설정에 필요한 함수들의 집합)
+void SetBetAmount(GAME_BET_RESULT *bet_results);
+void ClearLine(void);   // 현재 줄과 이전 줄을 지우는 함수
 
 // 홀 짝 게임 함수
 void PlayOddEvenGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results); // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
@@ -50,17 +52,17 @@ void ChooseOddEven(GAME_BET_RESULT *bet_results);                       // 홀 �
 void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
 
 int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex);
-int SignUpUser(ACCOUNT_INFO *user, int *user_num);
+void SignUpUser(ACCOUNT_INFO *user, int *user_num);
 void ClearInputBuffer(void);
 void RemoveNewline(char str[]);
-void GameList(void);
-void OddEvenGame(void);
+void GameList(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
+void OddEvenGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
 void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
 void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
 FILE *CheckFileOpen(FILE *userData);
 void LoadData(ACCOUNT_INFO *user,int *user_num);
 void StoreData(ACCOUNT_INFO *user, int user_num);
-void Profile(ACCOUNT_INFO *user, int currentUserIndex);
+void Profile(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
 void Withdrawal(ACCOUNT_INFO *user, int currentUserIndex);
 void Deposit(ACCOUNT_INFO *user, int currentUserIndex);
 #endif
