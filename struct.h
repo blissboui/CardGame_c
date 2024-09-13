@@ -1,5 +1,5 @@
-#ifndef __CARD_H__
-#define __CARD_H__
+#ifndef __STRUCT_H__
+#define __STRUCT_H__
 #include <stdbool.h>
 
 #define DECK 3                                           // 카드 덱 수

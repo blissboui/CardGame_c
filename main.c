@@ -1,5 +1,5 @@
 #include "function.h"
-#include "card.h"
+#include "struct.h"
 #include "show.h"
 
 int main(void)

@@ -1,6 +1,6 @@
 #include "function.h"
 #include "show.h"
-#include "card.h"
+#include "struct.h"
 
 FILE *CheckFileOpen(FILE *userData)
 {

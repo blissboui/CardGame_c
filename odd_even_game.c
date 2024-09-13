@@ -1,5 +1,5 @@
 #include "function.h"
-#include "card.h"
+#include "struct.h"
 #include "show.h"
 
 void OddEvenGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
@@ -9,7 +9,9 @@ void OddEvenGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
     while (1)
     {
         int select;
-        ShowOddEvenGameMenu();
+        ClearScreen();
+        puts("\n[ ODD-EVEN GAME ]");
+        ShowGameMenu();
         scanf("%d", &select);
 
         switch (select)
@@ -38,7 +40,7 @@ void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
     while (1)
     {
         int select;
-        ShowOddEvenGamePlay(bet_results);
+        ShowGamePlay(bet_results);
         scanf("%d", &select);
         switch (select)
         {
@@ -66,7 +68,7 @@ void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
     while (1)
     {
         int select;
-        ShowOddEvenGamePlay(bet_results);
+        ShowGamePlay(bet_results);
         scanf("%d", &select);
         switch (select)
         {
@@ -90,15 +92,16 @@ void PlayOddEvenGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results) // 홀�
     ChooseOddEven(*bet_results);         // 베팅 항목 출력 후 홀 짝 선택
     SetBetAmount(*bet_results);
     GetSecondCard(*gamecard);            // 두번째 카드 출력
-    GameResult(*gamecard, *bet_results); // 홀 짝 게임 결과 출력 후 저장
+    OddEvenGameResult(*gamecard, *bet_results); // 홀 짝 게임 결과 출력 후 저장
 }
+
 bool OddEvenResult(THE_CARD *gamecard) // 홀수 짝수 결과 반환 함수
 {
     bool result = (gamecard->num_first_card + gamecard->num_second_card) % 2 == 0 ? true : false;
     // 첫번째 카드와 두번째 카드를 더한 값이 짝수=true 홀수=false
     return result;
 }
-void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results) // 홀 짝 게임 결과 출력 후 저장 함수
+void OddEvenGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results) // 홀 짝 게임 결과 출력 후 저장 함수
 {
     // 홀수 짝수를 맞췄을 때
     if (OddEvenResult(gamecard) == bet_results->odd_even_choice)

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "card.h"
+#include "struct.h"
 
 void ClearScreen() // 콘솔 화면 지우는 함수
 {
@@ -48,17 +48,15 @@ void ShowProfile(ACCOUNT_INFO *user, int currentUserIndex)
            "3. EXIT \n\n"
            "Select: ",user[currentUserIndex].userID, user[currentUserIndex].balance);
 }
-void ShowOddEvenGameMenu(void) // 홀/짝 게임 메뉴 출력 함수
+void ShowGameMenu(void)
 {
-    ClearScreen();
-    printf("\n[ ODD-EVEN GAME ]\n"
-           "1. New Game \n"
+    printf("1. New Game \n"
            "2. Continue \n"
            "3. Result \n"
            "4. EXIT \n\n"
            "Select The Menu: ");
 }
-void ShowOddEvenGamePlay(GAME_BET_RESULT *bet_results) // 홀 짝 게임 플레이 메뉴 출력 함수
+void ShowGamePlay(GAME_BET_RESULT *bet_results)
 {
     ClearScreen();
     printf("\n[ GAME PLAY ]\n"
@@ -71,5 +69,11 @@ void ShowOddEvenBetItem(void) // 홀수 짝수 베팅 항목 출력 함수
 {
     printf("1. ODD \n"
            "2. EVEN \n"
-           "What Is Your Choice: ");
+           "What is your choice: ");
+}
+void ShowHighLowBetItem(void)
+{
+    printf("1. HIGH \n"
+           "2. LOW \n"
+           "What is your choice: ");
 }

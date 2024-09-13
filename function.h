@@ -8,7 +8,7 @@
 #include <conio.h>
 #include <windows.h>
 #include <stdbool.h>
-#include "card.h"
+#include "struct.h"
 
 #define LOGIN 1
 #define SIGN_UP 2
@@ -49,7 +49,10 @@ void ClearLine(void);   // 현재 줄과 이전 줄을 지우는 함수
 // 홀 짝 게임 함수
 void PlayOddEvenGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results); // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
 void ChooseOddEven(GAME_BET_RESULT *bet_results);                       // 홀 짝 베팅 항목 출력 후 선택하는 함수
-void GameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
+void OddEvenGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
+
+// 하이 로우 게임 함수
+void PlayHighLowGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results);
 
 int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex);
 void SignUpUser(ACCOUNT_INFO *user, int *user_num);
