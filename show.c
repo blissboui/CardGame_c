@@ -33,7 +33,7 @@ void ShowListGames(void) // 게임 목록 출력 함수
     ClearScreen();
     printf("\n[ List Of Games ] \n"
            "1. ODD-EVEN GAME \n"
-           "2. LOW-HIGH GAME \n"
+           "2. HIGH-LOW GAME \n"
            "3. EXIT \n\n"
            "Select The Game: ");
 }

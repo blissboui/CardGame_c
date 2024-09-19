@@ -47,21 +47,29 @@ void SetBetAmount(GAME_BET_RESULT *bet_results);
 void ClearLine(void);   // 현재 줄과 이전 줄을 지우는 함수
 
 // 홀 짝 게임 함수
+void OddEvenGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
 void PlayOddEvenGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results); // 홀짝 게임 플레이 함수 (홀짝게임에 필요한 함수들의 집합)
 void ChooseOddEven(GAME_BET_RESULT *bet_results);                       // 홀 짝 베팅 항목 출력 후 선택하는 함수
 void OddEvenGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);      // 홀 짝 게임 결과 출력 후 저장 함수
+void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
 
 // 하이 로우 게임 함수
+void HighLowGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
 void PlayHighLowGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results);
+void NewGameHighLow(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+void ContinueHighLow(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+void PlayHighLowGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results);
+void ChooseHighLow(GAME_BET_RESULT *bet_results);
+void HighLowGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results) ;
+bool HighLowResult(THE_CARD *gamecard);
+
 
 int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex);
 void SignUpUser(ACCOUNT_INFO *user, int *user_num);
 void ClearInputBuffer(void);
 void RemoveNewline(char str[]);
 void GameList(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
-void OddEvenGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
-void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
-void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
 FILE *CheckFileOpen(FILE *userData);
 void LoadData(ACCOUNT_INFO *user,int *user_num);
 void StoreData(ACCOUNT_INFO *user, int user_num);

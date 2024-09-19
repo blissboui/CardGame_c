@@ -20,6 +20,12 @@ void OddEvenGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
             NewGameOddEven(&gamecard, &bet_results);
             break;
         case CONTINUE:
+            if(gamecard == NULL)
+            {
+                printf("No saved game found to continue. \n");
+                getch();
+                break;
+            }
             ContinueOddEven(&gamecard, &bet_results);
             break;
         case RESULTS:
@@ -45,6 +51,12 @@ void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
         switch (select)
         {
         case START_GAME:
+            if(bet_results->user_balance <= 0)
+            {   
+                printf("Insufficient funds \n");
+                getch();
+                 break;
+            }
             if (state == 0)
             {
                 NewGameSetUp(&gamecard, &bet_results);
@@ -73,6 +85,12 @@ void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
         switch (select)
         {
         case START_GAME:
+            if(bet_results->user_balance <= 0)
+            {   
+                printf("Insufficient funds \n");
+                getch();
+                 break;
+            }
             ResetDecksAfterGames(&gamecard, &bet_results);
             PlayOddEvenGame(gamecard, &bet_results);
             break;

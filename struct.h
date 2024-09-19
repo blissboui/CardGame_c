@@ -32,8 +32,9 @@ typedef struct
     int num_of_games;                  // 카드 리셋 후 진행된 게임 수
     int size_results_memory;           // 결과 저장 메모리 크기
     int user_balance;
-    int betAmount;                
-    bool odd_even_choice;              // 짝수=true, 홀수=false
+    int betAmount;
+    bool odd_even_choice; // 짝수=true, 홀수=false
+    bool high_low_choice; // 하이=true, 로우=false
 } GAME_BET_RESULT;
 
 typedef struct

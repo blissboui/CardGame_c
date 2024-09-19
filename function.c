@@ -110,6 +110,7 @@ void GameList(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
             OddEvenGame(user, currentUserIndex, user_num);
             break;
         case HIGH_LOW_GAME:
+            HighLowGame(user, currentUserIndex, user_num);
             break;
         case EXIT:
             return;
@@ -151,7 +152,8 @@ void Deposit(ACCOUNT_INFO *user, int currentUserIndex)
     int depositAmount;
     ClearScreen();
     printf("\n[ Deposit ] \n"
-           "Deposit Amount: ");
+           "Balance: %d  \n\n"
+           "Deposit Amount: ", user[currentUserIndex].balance);
     scanf("%d", &depositAmount);
 
     user[currentUserIndex].balance += depositAmount;
@@ -159,17 +161,19 @@ void Deposit(ACCOUNT_INFO *user, int currentUserIndex)
 void Withdrawal(ACCOUNT_INFO *user, int currentUserIndex)
 {
     int whitdrawalAmount;
-    ClearScreen();
-    printf("\n[ Deposit ] \n"
-           "Withdrawal Amount: ");
-    scanf("%d", &whitdrawalAmount);
-
-    user[currentUserIndex].balance -= whitdrawalAmount;
+    do
+    {
+        ClearScreen();
+        printf("\n[ Deposit ] \n"
+               "Balance: %d  \n\n"
+               "Withdrawal Amount: ", user[currentUserIndex].balance);
+        scanf("%d", &whitdrawalAmount);
+        user[currentUserIndex].balance -= whitdrawalAmount;
+    } while(user[currentUserIndex].balance < 0);
 }
 void ClearInputBuffer(void)
 {
-    while (getchar() != '\n')
-        ;
+    while (getchar() != '\n');
 }
 void RemoveNewline(char str[])
 {
