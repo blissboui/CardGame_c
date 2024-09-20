@@ -12,7 +12,7 @@
 
 #define USER_DATA "user_data.txt"
 #define MAX_ID_LEN 10
-#define MAX_PW_LEN 10
+#define MAX_PW_LEN 20
 #define DEFAULT_USER_NUM 10
 // 총 120장
 

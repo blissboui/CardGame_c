@@ -161,15 +161,21 @@ void Deposit(ACCOUNT_INFO *user, int currentUserIndex)
 void Withdrawal(ACCOUNT_INFO *user, int currentUserIndex)
 {
     int whitdrawalAmount;
-    do
+    while(1)
     {
         ClearScreen();
         printf("\n[ Deposit ] \n"
                "Balance: %d  \n\n"
                "Withdrawal Amount: ", user[currentUserIndex].balance);
         scanf("%d", &whitdrawalAmount);
-        user[currentUserIndex].balance -= whitdrawalAmount;
-    } while(user[currentUserIndex].balance < 0);
+        if(user[currentUserIndex].balance >= whitdrawalAmount)
+        {
+            user[currentUserIndex].balance -= whitdrawalAmount;
+            break;
+        }
+        puts("please enter it correctly.");
+        getch();
+    }
 }
 void ClearInputBuffer(void)
 {
