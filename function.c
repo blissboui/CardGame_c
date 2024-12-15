@@ -112,7 +112,10 @@ void GameList(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
         case HIGH_LOW_GAME:
             HighLowGame(user, currentUserIndex, user_num);
             break;
-        case EXIT:
+        case SUIT_MATCHING_GAME:
+            SuitMatcGame(user, currentUserIndex, user_num);
+            break;
+        case BACK:
             return;
         default:
             puts("please enter it correctly.");
@@ -289,6 +292,7 @@ void GetSecondCard(THE_CARD *gamecard) /*** 두번째 카드 출력후 저장 **
     } while (CheckCardDuplication(gamecard->card[random_deck][random_suits][random_number]));
 
     gamecard->num_second_card = random_number + 1; // 두번째 카드 숫자저장
+    gamecard->suits_second_card = random_suits;
 
     ClearScreen(); // 화면 지우기
     suits = GetSuits(gamecard->suits_first_card);

@@ -63,7 +63,36 @@ void NewGameSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
                 state = 1;
             }
             ResetDecksAfterGames(&gamecard, &bet_results);
-            //PlaySuitMatc(gamecard, &bet_results);
+            PlaySuitMatc(gamecard, &bet_results);
+            break;
+        case END_GAME:
+            return;
+        default:
+            puts("Please enter it correctly.");
+            getch();
+            break;
+        }
+    }
+}
+
+void ContinueSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
+{
+    while (1)
+    {
+        int select;
+        ShowGamePlay(bet_results);
+        scanf("%d", &select);
+        switch (select)
+        {
+        case START_GAME:
+            if(bet_results->user_balance <= 0)
+            {   
+                printf("Insufficient funds \n");
+                getch();
+                 break;
+            }
+            ResetDecksAfterGames(&gamecard, &bet_results);
+            PlaySuitMatc(gamecard, &bet_results);
             break;
         case END_GAME:
             return;
@@ -82,7 +111,7 @@ void PlaySuitMatc(THE_CARD **gamecard, GAME_BET_RESULT **bet_results)
     ChooseSuitMatc(*bet_results);         // 베팅 항목 출력 후 홀 짝 선택
     SetBetAmount(*bet_results);
     GetSecondCard(*gamecard);            // 두번째 카드 출력
-    OddEvenGameResult(*gamecard, *bet_results); // 홀 짝 게임 결과 출력 후 저장
+    SuitMatcGameResult(*gamecard, *bet_results);
 }
 
 void ChooseSuitMatc(GAME_BET_RESULT *bet_results)
@@ -99,6 +128,26 @@ void ChooseSuitMatc(GAME_BET_RESULT *bet_results)
             getch();
             ClearCursorToEnd();
         }
+        break;
     }
     bet_results->suit_matching_choice = choice;
+}
+
+void SuitMatcGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)
+{
+    if (gamecard->suits_second_card == bet_results->suit_matching_choice)
+    {
+        puts("    [ Succeed ]");
+        strcpy(bet_results->game_results[bet_results->num_results], "Succeed");
+        bet_results ->user_balance += (bet_results->betAmount * SUIT_PAYOUT);
+    }
+
+    else
+    {
+        puts("      [ Fail ]");
+        strcpy(bet_results->game_results[bet_results->num_results], "Fail");
+    }
+    bet_results->num_results += 1;  // 저장된 결과 개수 증가
+    bet_results->num_of_games += 1; // 진행된 게임 수 증가
+    getch();
 }

@@ -39,7 +39,8 @@ void ShowListGames(void) // 게임 목록 출력 함수
     printf("\n[ List Of Games ] \n"
            "1. ODD-EVEN GAME \n"
            "2. HIGH-LOW GAME \n"
-           "3. EXIT \n\n"
+           "3. SUIT MATCHING GAME \n"
+           "4. EXIT \n\n"
            "Select The Game: ");
 }
 void ShowProfile(ACCOUNT_INFO *user, int currentUserIndex)

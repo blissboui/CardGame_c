@@ -9,6 +9,7 @@
 #define DEFAULT_RESULTS_MEMORY_SIZE 10                   // 결과 저장 메모리 기본크기
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
 #define BET_PAYOUT 1.98
+#define SUIT_PAYOUT 3.98
 
 #define USER_DATA "user_data.txt"
 #define MAX_ID_LEN 10
@@ -23,6 +24,7 @@ typedef struct
     int num_first_card;             // 첫번째 카드 숫자
     int suits_first_card;           // 첫번재 카드 문양
     int num_second_card;            // 두번째 카드 숫자
+    int suits_second_card;          // 두번째 카드 문양
 } THE_CARD;
 
 typedef struct

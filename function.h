@@ -71,6 +71,7 @@ void SuitMatcGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
 void NewGameSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
 void ChooseSuitMatc(GAME_BET_RESULT *bet_results);
 void PlaySuitMatc(THE_CARD **gamecard, GAME_BET_RESULT **bet_results);
+void SuitMatcGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);
 
 int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex);
 void SignUpUser(ACCOUNT_INFO *user, int *user_num);
