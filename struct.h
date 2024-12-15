@@ -35,6 +35,7 @@ typedef struct
     int betAmount;
     bool odd_even_choice; // 짝수=true, 홀수=false
     bool high_low_choice; // 하이=true, 로우=false
+    int suit_matching_choice; // 스페이드=1, 하트=2, 다이아=3, 클럽=4
 } GAME_BET_RESULT;
 
 typedef struct

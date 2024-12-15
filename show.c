@@ -10,6 +10,11 @@ void PauseScreen()  // 계속하려면 아무 키나 누르십시오 출력
 {
     system("pause");
 }
+void ClearCursorToEnd(void)
+{
+    printf("\033[2;1H");
+    printf("\033[K");
+}
 void ShowLoginMenu(void)
 {
     ClearScreen();
@@ -75,5 +80,13 @@ void ShowHighLowBetItem(void)
 {
     printf("1. HIGH \n"
            "2. LOW \n"
+           "What is your choice: ");
+}
+void ShowSuitMatcBetItem(void)
+{
+    printf("1. SPADE \n"
+           "2. HEARTS \n"
+           "3. DIAMONDS \n"
+           "4. CLUB \n"
            "What is your choice: ");
 }
