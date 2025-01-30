@@ -19,6 +19,8 @@
 #define ODD_EVEN_GAME 1
 #define HIGH_LOW_GAME 2
 #define SUIT_MATCHING_GAME 3
+#define CARD_BATTLE_GAME 4
+#define LISTBACK 5
 #define NEW_GAME 1
 #define CONTINUE 2
 #define RESULTS 3
@@ -72,6 +74,20 @@ void NewGameSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
 void ChooseSuitMatc(GAME_BET_RESULT *bet_results);
 void PlaySuitMatc(THE_CARD **gamecard, GAME_BET_RESULT **bet_results);
 void SuitMatcGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results);
+void ContinueSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+
+// 배틀 게임 함수
+
+void BattleGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num);
+void BattleGameGetCard(THE_CARD *gamecard, CARD *card);
+void PlayBattleGame(THE_CARD **gamecard, GAME_BET_RESULT **bet_results);
+float ReturnOdds(int userCard, int computerCard);
+void PrintSuits(int suits_num);
+void NewGameCardBattle(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+void ContinueCardBattle(THE_CARD **gamecard, GAME_BET_RESULT *bet_results);
+void BattleGameResult(int comSum, int userSum, GAME_BET_RESULT *bet_results, float odds);
+void CountDisplay(void);
+
 
 int LoginUser(ACCOUNT_INFO *user, int user_num, int *currentUserIndex);
 void SignUpUser(ACCOUNT_INFO *user, int *user_num);

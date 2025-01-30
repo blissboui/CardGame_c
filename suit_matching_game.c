@@ -25,7 +25,7 @@ void SuitMatcGame(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
                 getch();
                 break;
             }
-            //ContinueSuitMatc(&gamecard, &bet_results);
+            ContinueSuitMatc(&gamecard, &bet_results);
             break;
         case RESULTS:
             ShowGameResults(&bet_results);
@@ -70,6 +70,7 @@ void NewGameSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
         default:
             puts("Please enter it correctly.");
             getch();
+            ClearInputBuffer();
             break;
         }
     }
@@ -99,6 +100,7 @@ void ContinueSuitMatc(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
         default:
             puts("Please enter it correctly.");
             getch();
+            ClearInputBuffer();
             break;
         }
     }
@@ -108,7 +110,7 @@ void PlaySuitMatc(THE_CARD **gamecard, GAME_BET_RESULT **bet_results)
 {
     AddGameResultsMemory(bet_results);   // 결과 저장 메모리 부족 시 확장
     GetFirstCard(*gamecard);             // 첫번째 카드 출력
-    ChooseSuitMatc(*bet_results);         // 베팅 항목 출력 후 홀 짝 선택
+    ChooseSuitMatc(*bet_results);         // 베팅 항목 출력 후 선택
     SetBetAmount(*bet_results);
     GetSecondCard(*gamecard);            // 두번째 카드 출력
     SuitMatcGameResult(*gamecard, *bet_results);
@@ -128,14 +130,16 @@ void ChooseSuitMatc(GAME_BET_RESULT *bet_results)
             getch();
             ClearCursorToEnd();
         }
-        break;
+        
+        else
+            break;
     }
     bet_results->suit_matching_choice = choice;
 }
 
 void SuitMatcGameResult(THE_CARD *gamecard, GAME_BET_RESULT *bet_results)
 {
-    if (gamecard->suits_second_card == bet_results->suit_matching_choice)
+    if (gamecard->suits_second_card + 1 == bet_results->suit_matching_choice)
     {
         puts("    [ Succeed ]");
         strcpy(bet_results->game_results[bet_results->num_results], "Succeed");

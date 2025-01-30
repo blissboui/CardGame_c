@@ -70,6 +70,7 @@ void NewGameOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
         default:
             puts("Please enter it correctly.");
             getch();
+            ClearInputBuffer();
             break;
         }
     }
@@ -99,6 +100,7 @@ void ContinueOddEven(THE_CARD **gamecard, GAME_BET_RESULT *bet_results)
         default:
             puts("Please enter it correctly.");
             getch();
+            ClearInputBuffer();
             break;
         }
     }

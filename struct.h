@@ -10,12 +10,28 @@
 #define MAX_NUMBER_OF_GAMES (DECK * SUITS * NUMBERS / 4) // 새 게임 시 최대 가능 게임 횟수
 #define BET_PAYOUT 1.98
 #define SUIT_PAYOUT 3.98
+#define BATTLE_1 1.98   // 배틀게임 기본 배당률
+#define BATTLE_2 2.38
+#define BATTLE_3 2.68
+#define BATTLE_4 2.98
 
 #define USER_DATA "user_data.txt"
 #define MAX_ID_LEN 10
 #define MAX_PW_LEN 20
 #define DEFAULT_USER_NUM 10
 // 총 120장
+
+typedef struct
+{
+    int num_card;
+    int suit_card;
+}CARD;
+
+typedef struct
+{
+    CARD first_card;
+    CARD second_card;
+} FIRST_AND_SECOND_CARD;
 
 // 카드 덱 구조체
 typedef struct
@@ -26,6 +42,7 @@ typedef struct
     int num_second_card;            // 두번째 카드 숫자
     int suits_second_card;          // 두번째 카드 문양
 } THE_CARD;
+
 
 typedef struct
 {

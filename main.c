@@ -37,6 +37,7 @@ int main(void)
             default:
                 puts("please enter it correctly.");
                 getch();
+                ClearInputBuffer();
                 break;
             }
 
@@ -62,6 +63,7 @@ int main(void)
             default:
                 puts("please enter it correctly.");
                 getch();
+                ClearInputBuffer();
                 break;
             }
             if (select == LOG_OUT)

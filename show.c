@@ -10,7 +10,7 @@ void PauseScreen()  // 계속하려면 아무 키나 누르십시오 출력
 {
     system("pause");
 }
-void ClearCursorToEnd(void)
+void ClearCursorToEnd(void) // 커서를 특정 위치로 이동 후 지우는 함수 
 {
     printf("\033[2;1H");
     printf("\033[K");
@@ -40,7 +40,8 @@ void ShowListGames(void) // 게임 목록 출력 함수
            "1. ODD-EVEN GAME \n"
            "2. HIGH-LOW GAME \n"
            "3. SUIT MATCHING GAME \n"
-           "4. EXIT \n\n"
+           "4. CARD BATTLE GAME \n"
+           "5. EXIT \n\n"
            "Select The Game: ");
 }
 void ShowProfile(ACCOUNT_INFO *user, int currentUserIndex)

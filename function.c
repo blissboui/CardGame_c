@@ -115,11 +115,15 @@ void GameList(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
         case SUIT_MATCHING_GAME:
             SuitMatcGame(user, currentUserIndex, user_num);
             break;
-        case BACK:
+        case CARD_BATTLE_GAME:
+            BattleGame(user, currentUserIndex, user_num);
+            break;
+        case LISTBACK:
             return;
         default:
             puts("please enter it correctly.");
             getch();
+            ClearInputBuffer();
             break;
         }
     }
@@ -146,6 +150,7 @@ void Profile(ACCOUNT_INFO *user, int currentUserIndex, int user_num)
         default:
             puts("please enter it correctly.");
             getch();
+            ClearInputBuffer();
             break;
         }
     }
@@ -177,6 +182,7 @@ void Withdrawal(ACCOUNT_INFO *user, int currentUserIndex)
             break;
         }
         puts("please enter it correctly.");
+        ClearInputBuffer();
         getch();
     }
 }
@@ -360,6 +366,7 @@ void SetBetAmount(GAME_BET_RESULT *bet_results)
             break;
         printf("please enter it correctly");
         getch();
+        ClearInputBuffer();
         ClearLine();
     }
     bet_results->user_balance -= bet_results->betAmount;
